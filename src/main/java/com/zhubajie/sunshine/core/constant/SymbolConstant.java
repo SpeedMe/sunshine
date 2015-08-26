@@ -3,7 +3,7 @@ package com.zhubajie.sunshine.core.constant;
 /**
  * SymbolConstant : 符号常量
  *
- * @author arccode
+ * @author huanglei
  * @since 2014-12-20 11:34
  */
 public class SymbolConstant {

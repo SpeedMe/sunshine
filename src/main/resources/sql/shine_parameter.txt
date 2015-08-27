@@ -1,0 +1,31 @@
+user_id				用户id
+phone_number 		用户手机号
+nickname			用户别名
+realname			用户真实姓名
+email				用户邮箱
+password			用户密码
+regdate				用户注册时间
+avatar_path			头像路径
+
+
+
+channel_id			频道表id
+channel_name		频道名字
+channel_temp		频道温度
+
+
+
+topic_id 			话题id
+topic_temp			频道话题温度
+topic_name			频道话题名字
+topic_content		频道话题内容
+topic_create_time	创建话题的时间
+
+
+topic_answer_id		话题回答id
+topic_answer_temp	该回答的温度
+topic_answer_content 话题回复内容
+topic_answer_time	话题回复时间
+
+
+

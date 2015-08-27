@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhubajie.sunshine.web.mapper.SunAnswerThankMapper" >
+  <resultMap id="BaseResultMap" type="com.zhubajie.sunshine.web.model.SunAnswerThank" >
+    <id column="answer_thank_id" property="answerThankId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="topic_answer_id" property="topicAnswerId" jdbcType="INTEGER" />
+    <result column="thank_time" property="thankTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    answer_thank_id, user_id, topic_answer_id, thank_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThankExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from answer_thank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from answer_thank
+    where answer_thank_id = #{answerThankId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answer_thank
+    where answer_thank_id = #{answerThankId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThankExample" >
+    delete from answer_thank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" >
+    insert into answer_thank (answer_thank_id, user_id, topic_answer_id, 
+      thank_time)
+    values (#{answerThankId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{topicAnswerId,jdbcType=INTEGER}, 
+      #{thankTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" >
+    insert into answer_thank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="answerThankId != null" >
+        answer_thank_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="topicAnswerId != null" >
+        topic_answer_id,
+      </if>
+      <if test="thankTime != null" >
+        thank_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="answerThankId != null" >
+        #{answerThankId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topicAnswerId != null" >
+        #{topicAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="thankTime != null" >
+        #{thankTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThankExample" resultType="java.lang.Integer" >
+    select count(*) from answer_thank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update answer_thank
+    <set >
+      <if test="record.answerThankId != null" >
+        answer_thank_id = #{record.answerThankId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicAnswerId != null" >
+        topic_answer_id = #{record.topicAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.thankTime != null" >
+        thank_time = #{record.thankTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update answer_thank
+    set answer_thank_id = #{record.answerThankId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      topic_answer_id = #{record.topicAnswerId,jdbcType=INTEGER},
+      thank_time = #{record.thankTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" >
+    update answer_thank
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topicAnswerId != null" >
+        topic_answer_id = #{topicAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="thankTime != null" >
+        thank_time = #{thankTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where answer_thank_id = #{answerThankId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" >
+    update answer_thank
+    set user_id = #{userId,jdbcType=INTEGER},
+      topic_answer_id = #{topicAnswerId,jdbcType=INTEGER},
+      thank_time = #{thankTime,jdbcType=TIMESTAMP}
+    where answer_thank_id = #{answerThankId,jdbcType=INTEGER}
+  </update>
+</mapper>

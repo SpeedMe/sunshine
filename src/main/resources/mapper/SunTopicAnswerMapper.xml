@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhubajie.sunshine.web.mapper.SunTopicAnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+    <id column="topic_answer_id" property="topicAnswerId" jdbcType="INTEGER" />
+    <result column="topic_id" property="topicId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="topic_answer_temp" property="topicAnswerTemp" jdbcType="INTEGER" />
+    <result column="topic_answer_time" property="topicAnswerTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zhubajie.sunshine.web.model.SunTopicAnswer" extends="BaseResultMap" >
+    <result column="topic_answer_content" property="topicAnswerContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    topic_answer_id, topic_id, user_id, topic_answer_temp, topic_answer_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    topic_answer_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from topic_answer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from topic_answer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from topic_answer
+    where topic_answer_id = #{topicAnswerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from topic_answer
+    where topic_answer_id = #{topicAnswerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswerExample" >
+    delete from topic_answer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+    insert into topic_answer (topic_answer_id, topic_id, user_id, 
+      topic_answer_temp, topic_answer_time, topic_answer_content
+      )
+    values (#{topicAnswerId,jdbcType=INTEGER}, #{topicId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{topicAnswerTemp,jdbcType=INTEGER}, #{topicAnswerTime,jdbcType=TIMESTAMP}, #{topicAnswerContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+    insert into topic_answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicAnswerId != null" >
+        topic_answer_id,
+      </if>
+      <if test="topicId != null" >
+        topic_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="topicAnswerTemp != null" >
+        topic_answer_temp,
+      </if>
+      <if test="topicAnswerTime != null" >
+        topic_answer_time,
+      </if>
+      <if test="topicAnswerContent != null" >
+        topic_answer_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicAnswerId != null" >
+        #{topicAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="topicId != null" >
+        #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topicAnswerTemp != null" >
+        #{topicAnswerTemp,jdbcType=INTEGER},
+      </if>
+      <if test="topicAnswerTime != null" >
+        #{topicAnswerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicAnswerContent != null" >
+        #{topicAnswerContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswerExample" resultType="java.lang.Integer" >
+    select count(*) from topic_answer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update topic_answer
+    <set >
+      <if test="record.topicAnswerId != null" >
+        topic_answer_id = #{record.topicAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicId != null" >
+        topic_id = #{record.topicId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicAnswerTemp != null" >
+        topic_answer_temp = #{record.topicAnswerTemp,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicAnswerTime != null" >
+        topic_answer_time = #{record.topicAnswerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.topicAnswerContent != null" >
+        topic_answer_content = #{record.topicAnswerContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update topic_answer
+    set topic_answer_id = #{record.topicAnswerId,jdbcType=INTEGER},
+      topic_id = #{record.topicId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      topic_answer_temp = #{record.topicAnswerTemp,jdbcType=INTEGER},
+      topic_answer_time = #{record.topicAnswerTime,jdbcType=TIMESTAMP},
+      topic_answer_content = #{record.topicAnswerContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update topic_answer
+    set topic_answer_id = #{record.topicAnswerId,jdbcType=INTEGER},
+      topic_id = #{record.topicId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      topic_answer_temp = #{record.topicAnswerTemp,jdbcType=INTEGER},
+      topic_answer_time = #{record.topicAnswerTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+    update topic_answer
+    <set >
+      <if test="topicId != null" >
+        topic_id = #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="topicAnswerTemp != null" >
+        topic_answer_temp = #{topicAnswerTemp,jdbcType=INTEGER},
+      </if>
+      <if test="topicAnswerTime != null" >
+        topic_answer_time = #{topicAnswerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topicAnswerContent != null" >
+        topic_answer_content = #{topicAnswerContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where topic_answer_id = #{topicAnswerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+    update topic_answer
+    set topic_id = #{topicId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      topic_answer_temp = #{topicAnswerTemp,jdbcType=INTEGER},
+      topic_answer_time = #{topicAnswerTime,jdbcType=TIMESTAMP},
+      topic_answer_content = #{topicAnswerContent,jdbcType=LONGVARCHAR}
+    where topic_answer_id = #{topicAnswerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+    update topic_answer
+    set topic_id = #{topicId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      topic_answer_temp = #{topicAnswerTemp,jdbcType=INTEGER},
+      topic_answer_time = #{topicAnswerTime,jdbcType=TIMESTAMP}
+    where topic_answer_id = #{topicAnswerId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -86,6 +86,26 @@ public class TopicServiceImpl implements TopicService {
         return sunChannelTopic;
     }
 
+    /**
+     * 取消关注
+     * @param sunTopicAttention
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean unfollowTopic(SunTopicAttention sunTopicAttention) throws Exception {
+        //删除关注记录
+        sunTopicAttentionMapper.deleteByPrimaryKey(sunTopicAttention.getTopicAttentionId());
+
+        //减少话题温度
+        SunChannelTopic sunChannelTopic = increaseTopicTemp(sunTopicAttention.getTopicId(), -TemperatureConstant.TOPIC_ATTENTION_TEMP);
+
+        //减少频道温度
+        increaseChannleTemp(sunChannelTopic.getChannelId(), -TemperatureConstant.TOPIC_ATTENTION_TEMP);
+
+        return true;
+    }
+
 
     /**
      * 增加频道温度

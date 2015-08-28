@@ -98,13 +98,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" >
+  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" useGeneratedKeys="true" keyProperty="answer_thank_id">
     insert into answer_thank (answer_thank_id, user_id, topic_answer_id, 
       thank_time)
     values (#{answerThankId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{topicAnswerId,jdbcType=INTEGER}, 
       #{thankTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" >
+  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunAnswerThank" useGeneratedKeys="true" keyProperty="answer_thank_id">
     insert into answer_thank
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="answerThankId != null" >

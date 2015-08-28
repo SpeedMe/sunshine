@@ -1,9 +1,11 @@
 package com.zhubajie.sunshine.web.service.answerservice.impl;
 
 import com.zhubajie.sunshine.core.constant.TemperatureConstant;
+import com.zhubajie.sunshine.web.mapper.SunAnswerThankMapper;
 import com.zhubajie.sunshine.web.mapper.SunChannelTopicMapper;
 import com.zhubajie.sunshine.web.mapper.SunShineChannelMapper;
 import com.zhubajie.sunshine.web.mapper.SunTopicAnswerMapper;
+import com.zhubajie.sunshine.web.model.SunAnswerThank;
 import com.zhubajie.sunshine.web.model.SunChannelTopic;
 import com.zhubajie.sunshine.web.model.SunShineChannel;
 import com.zhubajie.sunshine.web.model.SunTopicAnswer;
@@ -28,6 +30,9 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired  //频道
     private SunShineChannelMapper sunShineChannelMapper;
 
+    @Autowired  //感谢回答
+    private SunAnswerThankMapper sunAnswerThankMapper;
+
     /**
      * 话题回复
      * @param sunTopicAnswer
@@ -47,6 +52,29 @@ public class AnswerServiceImpl implements AnswerService {
         increaseChannleTemp(sunChannelTopic.getChannelId(), TemperatureConstant.TOPIC_ANSWER_TEMP);
 
         return true;
+    }
+
+    /**
+     * 感谢回答
+     * @param sunAnswerThank
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public SunAnswerThank thankAnswer(SunAnswerThank sunAnswerThank) throws Exception {
+        //插入感谢回答记录
+        sunAnswerThankMapper.insertSelective(sunAnswerThank);
+
+        //增加回答温度
+        SunTopicAnswer sunTopicAnswer = increaseAnswerTemp(sunAnswerThank.getAnswerThankId(), TemperatureConstant.ANSWER_THANK_TEMP);
+
+        //增加话题温度
+        SunChannelTopic sunChannelTopic = increaseTopicTemp(sunTopicAnswer.getTopicId(), TemperatureConstant.ANSWER_THANK_TEMP);
+
+        //增加频道温度
+        increaseChannleTemp(sunChannelTopic.getChannelId(), TemperatureConstant.ANSWER_THANK_TEMP);
+
+        return sunAnswerThank;
     }
 
 

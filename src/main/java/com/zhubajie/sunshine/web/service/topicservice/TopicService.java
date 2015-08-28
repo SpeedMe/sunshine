@@ -33,4 +33,6 @@ public interface TopicService {
      * @throws Exception
      */
     SunChannelTopic attentionTopic(SunTopicAttention sunTopicAttention) throws Exception;
+
+    boolean unfollowTopic(SunTopicAttention sunTopicAttention) throws Exception;
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>发布</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="ratchet/css/ratchet.css" rel="stylesheet">
+    <link href="css/topic.css" rel="stylesheet">
+    <script src="ratchet/js/ratchet.js"></script>
+    <script src="ratchet/js/push.js"></script>
+    <script src="ratchet/js/sliders.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+</head>
+<body class="answer-detail-body issue">
+    <header class="bar bar-nav topic-header">
+        <button class="btn btn-link btn-nav pull-left">
+            <span class="icon icon-left-nav"></span>
+            发布
+        </button>
+    </header>
+    <nav class="bar bar-tab bottom-btn">
+        <a class="tab-item tab-item-left check">
+            <span class="icon"></span>
+            匿名
+        </a>
+        <a class="tab-item tab-item-right issue-btn">
+            <span></span>
+            发布
+        </a>
+    </nav>
+    <div class="content issue-content">
+        <form>
+            <textarea class="enter-input" rows="16" placeholder="写回答..."></textarea> 
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+    $(".check").click(function(){
+        $(".check").find('.icon').toggleClass("icon-check");
+    });
+    $(".issue-btn").click(function(){
+        var content = $(".issue-content").find("textarea").val(); 
+        if(content){
+            var isAnonymity = 1;
+            var channelId = location.href.substring("channelId=", "&");
+            var userId = location.href.substring("userId=");
+            var data = {
+                userId: userId,
+                channelId: channelId,
+                isAnonymity: isAnonymity,
+                topicContent: content
+            };
+            if($(".check").find('.icon-check').length){
+                isAnonymity = 0;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/shine/sunTopic/issueTopic',
+                data: data,
+                dataType: 'json',
+                 success: function (json) {
+                    if (json.meta.code == 200) {
+                        alert("登录成功");
+                        window.location.href = "index.html";
+                    }
+                     else {
+                        alert(json.meta.message);
+                     }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }else{
+            alert("请填写内容后再发布");
+        }
+    })
+</script>
+</html>

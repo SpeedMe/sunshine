@@ -48,7 +48,7 @@ public class SunUserController {
             response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"注册成功",sunShineUser);
         }catch (Exception e){
             logger.error(e.getMessage());
-            response = new FeResponse<SunShineUser>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage());
+            response = new FeResponse<SunShineUser>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
         }
 
         return response;
@@ -62,16 +62,16 @@ public class SunUserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public FeResponse<String> login(@RequestBody SunShineUser sunShineUser, HttpSession session){
-        FeResponse<String> response;
+    public FeResponse<Boolean> login(SunShineUser sunShineUser, HttpSession session){
+        FeResponse<Boolean> response;
 
         try{
-            userService.login(sunShineUser);
+            boolean success = userService.login(sunShineUser);
             session.setAttribute("sunShineUser", sunShineUser);
-            response = new FeResponse<String>(HttpStatus.OK.value(),"登录成功");
+            response = new FeResponse<Boolean>(HttpStatus.OK.value(),"登录成功",success);
         }catch (Exception e){
             logger.error(e.getMessage());
-            response = new FeResponse<String>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage());
+            response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(),null);
         }
 
         return response;
@@ -87,7 +87,7 @@ public class SunUserController {
     public FeResponse<SunShineUser> getLoginState(HttpSession session){
         FeResponse<SunShineUser> response;
 
-        if (session != null){
+        if (session.getAttribute("sunShineUser") != null){
             response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"已登录",(SunShineUser)session.getAttribute("sunShineUser"));
         }else {
             response = new FeResponse<SunShineUser>(HttpStatus.NOT_EXTENDED.value(), "未登录", null);

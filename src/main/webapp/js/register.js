@@ -15,9 +15,11 @@
                     data: data,
                     dataType: 'json',
                     success: function(json){
-                        if (json.state == 200) {
+                        if (json.meta.code == 200) {
                         	alert("注册成功");
-                        	window.location.href="login.html"; 
+                        	window.location.href="index.html";
+                        }else{
+                            alert(json.meta.message);
                         }
                     },
                     error: function(err) {

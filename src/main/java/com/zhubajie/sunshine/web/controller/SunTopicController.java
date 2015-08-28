@@ -32,12 +32,12 @@ public class SunTopicController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/getTopicsByChannelIdOrderByTemp", method = RequestMethod.GET)
-    public FeResponse<List> getTopicsByChannelIdOrderByTemp(Integer channelId) {
+    @RequestMapping(value = "/getTopicsByChannelIdOrderByTemp/{channelId}", method = RequestMethod.GET)
+    public FeResponse<List> getTopicsByChannelIdOrderByTemp(String channelId) {
         FeResponse<List> response;
 
         try {
-            List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(channelId);
+            List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(Integer.parseInt(channelId));
 
             response = new FeResponse<List>(HttpStatus.OK.value(), "查询成功", sunChannelTopics);
         } catch (Exception e) {

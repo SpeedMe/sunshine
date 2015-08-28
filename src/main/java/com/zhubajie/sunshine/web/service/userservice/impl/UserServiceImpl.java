@@ -21,7 +21,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(SunShineUser sunShineUser) throws Exception {
+
+        if (existEmailOrNickname(sunShineUser)){
+            throw new Exception("已经存在此用户名或者邮箱");
+        }
+
         return sunShineUserMapper.insertSelective(sunShineUser) == 1 ? true :false;
+    }
+
+    /**
+     * 是否已经存在此用户名或者邮箱
+     * @param sunShineUser
+     * @return
+     * @throws Exception
+     */
+    private boolean existEmailOrNickname(SunShineUser sunShineUser) throws Exception{
+        SunShineUserExample sunShineUserExample = new SunShineUserExample();
+        sunShineUserExample.or().andNicknameEqualTo(sunShineUser.getNickname());
+        sunShineUserExample.or().andEmailEqualTo(sunShineUser.getEmail());
+
+        return sunShineUserMapper.selectByExample(sunShineUserExample).size() == 0 ? false :true;
     }
 
     @Override

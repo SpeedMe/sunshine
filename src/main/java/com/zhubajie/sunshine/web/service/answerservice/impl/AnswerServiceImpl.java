@@ -54,6 +54,11 @@ public class AnswerServiceImpl implements AnswerService {
         return true;
     }
 
+    @Override
+    public SunTopicAnswer getAnswerById(Integer topicAnswerId) throws Exception {
+        return sunTopicAnswerMapper.selectByPrimaryKey(topicAnswerId);
+    }
+
     /**
      * 感谢回答
      * @param sunAnswerThank

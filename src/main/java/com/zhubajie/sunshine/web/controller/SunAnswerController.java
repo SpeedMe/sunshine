@@ -32,7 +32,7 @@ public class SunAnswerController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/answerTopic", method = RequestMethod.POST)
     public FeResponse<Boolean> answerTopic(SunTopicAnswer sunTopicAnswer){
         FeResponse<Boolean> response;
 
@@ -52,7 +52,7 @@ public class SunAnswerController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/thankAnswer", method = RequestMethod.POST)
     public FeResponse<SunAnswerThank> thankAnswer(SunAnswerThank sunAnswerThank){
         FeResponse<SunAnswerThank> response;
 
@@ -74,7 +74,7 @@ public class SunAnswerController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "/hasThankedAnswer",method = RequestMethod.POST)
     public FeResponse<Boolean> hasThankedAnswer(SunAnswerThank sunAnswerThank){
         FeResponse<Boolean> response;
 

@@ -34,7 +34,7 @@ public class SunUserController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public FeResponse<SunShineUser> register(@RequestBody SunShineUser sunShineUser, HttpSession session) {
+    public FeResponse<SunShineUser> register(SunShineUser sunShineUser, HttpSession session) {
         FeResponse<SunShineUser> response;
 
         System.out.println("**************************");
@@ -122,7 +122,7 @@ public class SunUserController {
      * @param nickname
      * @return
      */
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/queryUserByName", method = RequestMethod.GET)
     @ResponseBody
     public FeResponse<List> queryUserByName(String nickname){
         FeResponse<List> response;

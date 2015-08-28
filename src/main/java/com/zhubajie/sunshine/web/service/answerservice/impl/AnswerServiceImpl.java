@@ -5,10 +5,7 @@ import com.zhubajie.sunshine.web.mapper.SunAnswerThankMapper;
 import com.zhubajie.sunshine.web.mapper.SunChannelTopicMapper;
 import com.zhubajie.sunshine.web.mapper.SunShineChannelMapper;
 import com.zhubajie.sunshine.web.mapper.SunTopicAnswerMapper;
-import com.zhubajie.sunshine.web.model.SunAnswerThank;
-import com.zhubajie.sunshine.web.model.SunChannelTopic;
-import com.zhubajie.sunshine.web.model.SunShineChannel;
-import com.zhubajie.sunshine.web.model.SunTopicAnswer;
+import com.zhubajie.sunshine.web.model.*;
 import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +58,7 @@ public class AnswerServiceImpl implements AnswerService {
      * @throws Exception
      */
     @Override
+    @Transactional
     public SunAnswerThank thankAnswer(SunAnswerThank sunAnswerThank) throws Exception {
         //插入感谢回答记录
         sunAnswerThankMapper.insertSelective(sunAnswerThank);
@@ -75,6 +73,21 @@ public class AnswerServiceImpl implements AnswerService {
         increaseChannleTemp(sunChannelTopic.getChannelId(), TemperatureConstant.ANSWER_THANK_TEMP);
 
         return sunAnswerThank;
+    }
+
+    /**
+     * 是否已感谢回答
+     * @param sunAnswerThank
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean hasThankedAnswer(SunAnswerThank sunAnswerThank) throws Exception {
+
+        SunAnswerThankExample sunAnswerThankExample = new SunAnswerThankExample();
+        sunAnswerThankExample.createCriteria().andUserIdEqualTo(sunAnswerThank.getUserId()).andTopicAnswerIdEqualTo(sunAnswerThank.getTopicAnswerId());
+
+        return sunAnswerThankMapper.selectByExample(sunAnswerThankExample).size() == 0 ? false : true;
     }
 
 

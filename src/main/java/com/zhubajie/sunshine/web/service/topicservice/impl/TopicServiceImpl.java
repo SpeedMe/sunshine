@@ -72,7 +72,7 @@ public class TopicServiceImpl implements TopicService {
      * @throws Exception
      */
     @Override
-    public SunChannelTopic attentionTopic(SunTopicAttention sunTopicAttention) throws Exception {
+    public SunChannelTopic followTopic(SunTopicAttention sunTopicAttention) throws Exception {
 
         //插入关注表
         sunTopicAttentionMapper.insertSelective(sunTopicAttention);
@@ -104,6 +104,21 @@ public class TopicServiceImpl implements TopicService {
         increaseChannleTemp(sunChannelTopic.getChannelId(), -TemperatureConstant.TOPIC_ATTENTION_TEMP);
 
         return true;
+    }
+
+    /**
+     * 是否已关注
+     * @param sunTopicAttention
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public boolean hasFollowedTopic(SunTopicAttention sunTopicAttention) throws Exception {
+
+        SunTopicAttentionExample sunTopicAttentionExample = new SunTopicAttentionExample();
+        sunTopicAttentionExample.createCriteria().andUserIdEqualTo(sunTopicAttention.getUserId()).andTopicIdEqualTo(sunTopicAttention.getTopicId());
+
+        return sunTopicAttentionMapper.selectByExample(sunTopicAttentionExample).size() == 0 ? false : true;
     }
 
 

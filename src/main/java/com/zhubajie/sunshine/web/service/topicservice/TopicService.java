@@ -32,7 +32,21 @@ public interface TopicService {
      * @return
      * @throws Exception
      */
-    SunChannelTopic attentionTopic(SunTopicAttention sunTopicAttention) throws Exception;
+    SunChannelTopic followTopic(SunTopicAttention sunTopicAttention) throws Exception;
 
+    /**
+     * 取消关注
+     * @param sunTopicAttention
+     * @return
+     * @throws Exception
+     */
     boolean unfollowTopic(SunTopicAttention sunTopicAttention) throws Exception;
+
+    /**
+     * 是否已经关注
+     * @param sunTopicAttention
+     * @return
+     * @throws Exception
+     */
+    boolean hasFollowedTopic(SunTopicAttention sunTopicAttention) throws Exception;
 }

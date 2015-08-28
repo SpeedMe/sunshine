@@ -23,4 +23,12 @@ public interface AnswerService {
      * @throws Exception
      */
     SunAnswerThank thankAnswer(SunAnswerThank sunAnswerThank) throws Exception;
+
+    /**
+     * 是否已感谢回答
+     * @param sunAnswerThank
+     * @return
+     * @throws Exception
+     */
+    boolean hasThankedAnswer(SunAnswerThank sunAnswerThank) throws Exception;
 }

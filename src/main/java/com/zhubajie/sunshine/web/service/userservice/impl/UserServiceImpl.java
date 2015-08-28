@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SunShineUser queryUserById(Integer userId) throws Exception {
+    public SunShineUser getUserById(Integer userId) throws Exception {
         return sunShineUserMapper.selectByPrimaryKey(userId);
     }
 

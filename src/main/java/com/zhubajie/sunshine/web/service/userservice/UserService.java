@@ -29,7 +29,7 @@ public interface UserService {
      * @return 用户实体
      * @throws Exception
      */
-    SunShineUser queryUserById(Integer userId) throws Exception;
+    SunShineUser getUserById(Integer userId) throws Exception;
 
     /**
      * 登录操作

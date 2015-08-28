@@ -92,6 +92,11 @@ public class SunAnswerController {
         return response;
     }
 
+    /**
+     * 得到话题所有答案，按温度排序
+     * @param topicId
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/queryAnswersByTopicIdOrderByTemp/{topicId}",method = RequestMethod.GET)
     public FeResponse<List> queryAnswersByTopicIdOrderByTemp(@PathVariable String topicId){
@@ -108,6 +113,11 @@ public class SunAnswerController {
         return response;
     }
 
+    /**
+     * 得到温度最高的答复
+     * @param topicId
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/queryMaxTempAnswerByTopicId/{topicId}",method = RequestMethod.GET)
     public FeResponse<SunTopicAnswer> queryMaxTempAnswerByTopicId(@PathVariable String topicId){
@@ -117,7 +127,7 @@ public class SunAnswerController {
             List<SunTopicAnswer> sunTopicAnswers = answerService.queryAnswersByTopicIdOrderByTemp(Integer.parseInt(topicId));
             if (sunTopicAnswers.size() == 0){
                 response = new FeResponse<SunTopicAnswer>(HttpStatus.OK.value(),"查询成功",null);
-            }{
+            }else {
                 response = new FeResponse<SunTopicAnswer>(HttpStatus.OK.value(),"查询成功",sunTopicAnswers.get(sunTopicAnswers.size()-1));
             }
         }catch (Exception e){

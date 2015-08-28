@@ -102,7 +102,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunShineUser" >
+  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunShineUser" useGeneratedKeys="true" keyProperty="user_id">
     insert into shine_user (user_id, phone_number, nickname, 
       realname, email, password, 
       regdate, avatar_path)
@@ -110,7 +110,7 @@
       #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{regdate,jdbcType=TIMESTAMP}, #{avatarPath,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunShineUser" >
+  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunShineUser" useGeneratedKeys="true" keyProperty="user_id">
     insert into shine_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >

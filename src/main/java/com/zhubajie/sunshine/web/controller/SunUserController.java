@@ -38,13 +38,13 @@ public class SunUserController {
         FeResponse<SunShineUser> response;
 
         try {
-            userService.addUser(sunShineUser);
+            SunShineUser result = userService.addUser(sunShineUser);
 
             //还是安全点好
-            sunShineUser.setPassword("********");
+            result.setPassword("********");
 
-            session.setAttribute("sunShineUser", sunShineUser);
-            response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"注册成功",sunShineUser);
+            session.setAttribute("sunShineUser", result);
+            response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"注册成功",result);
         }catch (Exception e){
             logger.error(e.getMessage());
             response = new FeResponse<SunShineUser>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
@@ -65,13 +65,13 @@ public class SunUserController {
         FeResponse<Boolean> response;
 
         try{
-            boolean success = userService.login(sunShineUser);
+            SunShineUser result = userService.login(sunShineUser);
 
             //还是安全点好
             sunShineUser.setPassword("********");
 
-            session.setAttribute("sunShineUser", sunShineUser);
-            response = new FeResponse<Boolean>(HttpStatus.OK.value(),"登录成功",success);
+            session.setAttribute("sunShineUser", result);
+            response = new FeResponse<Boolean>(HttpStatus.OK.value(),"登录成功",true);
         }catch (Exception e){
             logger.error(e.getMessage());
             response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(),null);

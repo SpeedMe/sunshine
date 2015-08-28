@@ -13,11 +13,11 @@ public class SunChannelTopic {
 
     private String topicName;
 
+    private String topicContent;
+
     private Date topicCreateTime;
 
     private Boolean isAnonymity;
-
-    private String topicContent;
 
     public Integer getTopicId() {
         return topicId;
@@ -59,6 +59,14 @@ public class SunChannelTopic {
         this.topicName = topicName == null ? null : topicName.trim();
     }
 
+    public String getTopicContent() {
+        return topicContent;
+    }
+
+    public void setTopicContent(String topicContent) {
+        this.topicContent = topicContent == null ? null : topicContent.trim();
+    }
+
     public Date getTopicCreateTime() {
         return topicCreateTime;
     }
@@ -73,13 +81,5 @@ public class SunChannelTopic {
 
     public void setIsAnonymity(Boolean isAnonymity) {
         this.isAnonymity = isAnonymity;
-    }
-
-    public String getTopicContent() {
-        return topicContent;
-    }
-
-    public void setTopicContent(String topicContent) {
-        this.topicContent = topicContent == null ? null : topicContent.trim();
     }
 }

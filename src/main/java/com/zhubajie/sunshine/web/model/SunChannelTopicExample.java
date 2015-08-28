@@ -415,6 +415,76 @@ public class SunChannelTopicExample {
             return (Criteria) this;
         }
 
+        public Criteria andTopicContentIsNull() {
+            addCriterion("topic_content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentIsNotNull() {
+            addCriterion("topic_content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentEqualTo(String value) {
+            addCriterion("topic_content =", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentNotEqualTo(String value) {
+            addCriterion("topic_content <>", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentGreaterThan(String value) {
+            addCriterion("topic_content >", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentGreaterThanOrEqualTo(String value) {
+            addCriterion("topic_content >=", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentLessThan(String value) {
+            addCriterion("topic_content <", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentLessThanOrEqualTo(String value) {
+            addCriterion("topic_content <=", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentLike(String value) {
+            addCriterion("topic_content like", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentNotLike(String value) {
+            addCriterion("topic_content not like", value, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentIn(List<String> values) {
+            addCriterion("topic_content in", values, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentNotIn(List<String> values) {
+            addCriterion("topic_content not in", values, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentBetween(String value1, String value2) {
+            addCriterion("topic_content between", value1, value2, "topicContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicContentNotBetween(String value1, String value2) {
+            addCriterion("topic_content not between", value1, value2, "topicContent");
+            return (Criteria) this;
+        }
+
         public Criteria andTopicCreateTimeIsNull() {
             addCriterion("topic_create_time is null");
             return (Criteria) this;

@@ -20,13 +20,13 @@ public class UserServiceImpl implements UserService {
     private SunShineUserMapper sunShineUserMapper;
 
     @Override
-    public boolean addUser(SunShineUser sunShineUser) throws Exception {
+    public SunShineUser addUser(SunShineUser sunShineUser) throws Exception {
 
         if (existEmailOrNickname(sunShineUser)){
             throw new Exception("已经存在此用户名或者邮箱");
         }
-
-        return sunShineUserMapper.insertSelective(sunShineUser) == 1 ? true :false;
+        sunShineUserMapper.insertSelective(sunShineUser);
+        return sunShineUser;
     }
 
     /**
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(SunShineUser sunShineUser) throws Exception {
+    public SunShineUser login(SunShineUser sunShineUser) throws Exception {
         SunShineUserExample sunShineUserExample = new SunShineUserExample();
         sunShineUserExample.createCriteria().andNicknameEqualTo(sunShineUser.getNickname());
 
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
             throw new Exception("密码错误");
         }
 
-        return true;
+        return userRealList.get(0);
     }
 
     /**

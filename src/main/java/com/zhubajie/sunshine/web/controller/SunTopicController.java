@@ -33,7 +33,7 @@ public class SunTopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/getTopicsByChannelIdOrderByTemp/{channelId}", method = RequestMethod.GET)
-    public FeResponse<List> getTopicsByChannelIdOrderByTemp(String channelId) {
+    public FeResponse<List> getTopicsByChannelIdOrderByTemp(@PathVariable String channelId) {
         FeResponse<List> response;
 
         try {

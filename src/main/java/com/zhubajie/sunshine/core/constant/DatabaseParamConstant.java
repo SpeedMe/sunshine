@@ -7,11 +7,11 @@ package com.zhubajie.sunshine.core.constant;
 public class DatabaseParamConstant {
 
     //频道温度
-    public final static String CHANNEL_TEMP = "channel_temp";
+    public final static String CHANNEL_TEMP = "channel_temp desc";
 
     //话题温度
-    public final static String TOPIC_TEMP = "topic_temp";
+    public final static String TOPIC_TEMP = "topic_temp desc";
 
     //回复温度
-    public final static String ANSWER_TEMP = "topic_answer_temp";
+    public final static String ANSWER_TEMP = "topic_answer_temp desc";
 }

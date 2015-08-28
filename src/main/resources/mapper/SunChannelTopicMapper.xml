@@ -7,11 +7,9 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="topic_temp" property="topicTemp" jdbcType="INTEGER" />
     <result column="topic_name" property="topicName" jdbcType="VARCHAR" />
+    <result column="topic_content" property="topicContent" jdbcType="VARCHAR" />
     <result column="topic_create_time" property="topicCreateTime" jdbcType="TIMESTAMP" />
     <result column="is_anonymity" property="isAnonymity" jdbcType="BIT" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.zhubajie.sunshine.web.model.SunChannelTopic" extends="BaseResultMap" >
-    <result column="topic_content" property="topicContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,27 +70,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    topic_id, channel_id, user_id, topic_temp, topic_name, topic_create_time, is_anonymity
+    topic_id, channel_id, user_id, topic_temp, topic_name, topic_content, topic_create_time, 
+    is_anonymity
   </sql>
-  <sql id="Blob_Column_List" >
-    topic_content
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopicExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from channel_topic
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopicExample" >
     select
     <if test="distinct" >
@@ -107,11 +87,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from channel_topic
     where topic_id = #{topicId,jdbcType=INTEGER}
   </select>
@@ -125,15 +103,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" useGeneratedKeys="true" keyProperty="topic_id">
+  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" >
     insert into channel_topic (topic_id, channel_id, user_id, 
-      topic_temp, topic_name, topic_create_time, 
-      is_anonymity, topic_content)
+      topic_temp, topic_name, topic_content, 
+      topic_create_time, is_anonymity)
     values (#{topicId,jdbcType=INTEGER}, #{channelId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{topicTemp,jdbcType=INTEGER}, #{topicName,jdbcType=VARCHAR}, #{topicCreateTime,jdbcType=TIMESTAMP}, 
-      #{isAnonymity,jdbcType=BIT}, #{topicContent,jdbcType=LONGVARCHAR})
+      #{topicTemp,jdbcType=INTEGER}, #{topicName,jdbcType=VARCHAR}, #{topicContent,jdbcType=VARCHAR}, 
+      #{topicCreateTime,jdbcType=TIMESTAMP}, #{isAnonymity,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" useGeneratedKeys="true" keyProperty="topic_id">
+  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" >
     insert into channel_topic
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="topicId != null" >
@@ -151,14 +129,14 @@
       <if test="topicName != null" >
         topic_name,
       </if>
+      <if test="topicContent != null" >
+        topic_content,
+      </if>
       <if test="topicCreateTime != null" >
         topic_create_time,
       </if>
       <if test="isAnonymity != null" >
         is_anonymity,
-      </if>
-      <if test="topicContent != null" >
-        topic_content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -177,14 +155,14 @@
       <if test="topicName != null" >
         #{topicName,jdbcType=VARCHAR},
       </if>
+      <if test="topicContent != null" >
+        #{topicContent,jdbcType=VARCHAR},
+      </if>
       <if test="topicCreateTime != null" >
         #{topicCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isAnonymity != null" >
         #{isAnonymity,jdbcType=BIT},
-      </if>
-      <if test="topicContent != null" >
-        #{topicContent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -212,30 +190,16 @@
       <if test="record.topicName != null" >
         topic_name = #{record.topicName,jdbcType=VARCHAR},
       </if>
+      <if test="record.topicContent != null" >
+        topic_content = #{record.topicContent,jdbcType=VARCHAR},
+      </if>
       <if test="record.topicCreateTime != null" >
         topic_create_time = #{record.topicCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.isAnonymity != null" >
         is_anonymity = #{record.isAnonymity,jdbcType=BIT},
       </if>
-      <if test="record.topicContent != null" >
-        topic_content = #{record.topicContent,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update channel_topic
-    set topic_id = #{record.topicId,jdbcType=INTEGER},
-      channel_id = #{record.channelId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      topic_temp = #{record.topicTemp,jdbcType=INTEGER},
-      topic_name = #{record.topicName,jdbcType=VARCHAR},
-      topic_create_time = #{record.topicCreateTime,jdbcType=TIMESTAMP},
-      is_anonymity = #{record.isAnonymity,jdbcType=BIT},
-      topic_content = #{record.topicContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -247,6 +211,7 @@
       user_id = #{record.userId,jdbcType=INTEGER},
       topic_temp = #{record.topicTemp,jdbcType=INTEGER},
       topic_name = #{record.topicName,jdbcType=VARCHAR},
+      topic_content = #{record.topicContent,jdbcType=VARCHAR},
       topic_create_time = #{record.topicCreateTime,jdbcType=TIMESTAMP},
       is_anonymity = #{record.isAnonymity,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -268,27 +233,16 @@
       <if test="topicName != null" >
         topic_name = #{topicName,jdbcType=VARCHAR},
       </if>
+      <if test="topicContent != null" >
+        topic_content = #{topicContent,jdbcType=VARCHAR},
+      </if>
       <if test="topicCreateTime != null" >
         topic_create_time = #{topicCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isAnonymity != null" >
         is_anonymity = #{isAnonymity,jdbcType=BIT},
       </if>
-      <if test="topicContent != null" >
-        topic_content = #{topicContent,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where topic_id = #{topicId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" >
-    update channel_topic
-    set channel_id = #{channelId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      topic_temp = #{topicTemp,jdbcType=INTEGER},
-      topic_name = #{topicName,jdbcType=VARCHAR},
-      topic_create_time = #{topicCreateTime,jdbcType=TIMESTAMP},
-      is_anonymity = #{isAnonymity,jdbcType=BIT},
-      topic_content = #{topicContent,jdbcType=LONGVARCHAR}
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" >
@@ -297,6 +251,7 @@
       user_id = #{userId,jdbcType=INTEGER},
       topic_temp = #{topicTemp,jdbcType=INTEGER},
       topic_name = #{topicName,jdbcType=VARCHAR},
+      topic_content = #{topicContent,jdbcType=VARCHAR},
       topic_create_time = #{topicCreateTime,jdbcType=TIMESTAMP},
       is_anonymity = #{isAnonymity,jdbcType=BIT}
     where topic_id = #{topicId,jdbcType=INTEGER}

@@ -14,7 +14,7 @@ public interface UserService {
      * @param sunShineUser 用户实体
      * @throws Exception
      */
-    boolean addUser(SunShineUser sunShineUser) throws Exception;
+    SunShineUser addUser(SunShineUser sunShineUser) throws Exception;
 
     /**
      * 更新用户信息
@@ -37,7 +37,7 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    boolean login(SunShineUser sunShineUser) throws Exception;
+    SunShineUser login(SunShineUser sunShineUser) throws Exception;
 
     /**
      * 模糊查询用户

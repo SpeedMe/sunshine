@@ -101,7 +101,7 @@ public class SunTopicController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/followTopic", method = RequestMethod.POST)
     public FeResponse<SunChannelTopic> followTopic(SunTopicAttention sunTopicAttention){
         FeResponse<SunChannelTopic> response;
 
@@ -124,7 +124,7 @@ public class SunTopicController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/unfollowTopic", method = RequestMethod.POST)
     public FeResponse<Boolean> unfollowTopic(SunTopicAttention sunTopicAttention){
         FeResponse<Boolean> response;
 
@@ -148,7 +148,7 @@ public class SunTopicController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/hasFollowedTopic", method = RequestMethod.GET)
     public FeResponse<Boolean> hasFollowedTopic(SunTopicAttention sunTopicAttention){
         FeResponse<Boolean> response;
 

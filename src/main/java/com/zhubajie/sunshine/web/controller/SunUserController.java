@@ -37,13 +37,12 @@ public class SunUserController {
     public FeResponse<SunShineUser> register(SunShineUser sunShineUser, HttpSession session) {
         FeResponse<SunShineUser> response;
 
-        System.out.println("**************************");
-        System.out.println("nickname: " + sunShineUser.getNickname());
-        System.out.println("email: " + sunShineUser.getEmail());
-        System.out.println("password: " + sunShineUser.getPassword());
-
         try {
             userService.addUser(sunShineUser);
+
+            //还是安全点好
+            sunShineUser.setPassword("********");
+
             session.setAttribute("sunShineUser", sunShineUser);
             response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"注册成功",sunShineUser);
         }catch (Exception e){
@@ -67,6 +66,10 @@ public class SunUserController {
 
         try{
             boolean success = userService.login(sunShineUser);
+
+            //还是安全点好
+            sunShineUser.setPassword("********");
+
             session.setAttribute("sunShineUser", sunShineUser);
             response = new FeResponse<Boolean>(HttpStatus.OK.value(),"登录成功",success);
         }catch (Exception e){
@@ -108,6 +111,9 @@ public class SunUserController {
 
         try{
             SunShineUser sunShineUser = userService.getUserById(Integer.parseInt(userId));
+
+            //还是安全点好
+            sunShineUser.setPassword("********");
 
             response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"查找成功", sunShineUser);
         }catch (Exception e){

@@ -1,6 +1,8 @@
 package com.zhubajie.sunshine.web.controller;
 
 import com.zhubajie.sunshine.core.entity.FeResponse;
+import com.zhubajie.sunshine.core.util.DateStyle;
+import com.zhubajie.sunshine.core.util.DateUtil;
 import com.zhubajie.sunshine.web.model.SunAnswerThank;
 import com.zhubajie.sunshine.web.model.SunTopicAnswer;
 import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.security.provider.Sun;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -138,5 +141,27 @@ public class SunAnswerController {
         return response;
     }
 
+    /**
+     * 根据id获取回复
+     * @param topicAnswerId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(name = "/getAnswerById/{topicAnswerId}",method = RequestMethod.GET)
+    public FeResponse<SunTopicAnswer> getAnswerById(@PathVariable String topicAnswerId){
+        FeResponse<SunTopicAnswer> response;
+
+        try {
+            SunTopicAnswer sunTopicAnswer = answerService.getAnswerById(Integer.parseInt(topicAnswerId));
+
+            sunTopicAnswer.setTopicAnswerTime(DateUtil.parseDate(DateUtil.getDateStr(sunTopicAnswer.getTopicAnswerTime()), DateStyle.YYYY_MM_DD_CN.getValue()));
+
+            response = new FeResponse<SunTopicAnswer>(HttpStatus.OK.value(),"查找成功",sunTopicAnswer);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<SunTopicAnswer>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+        return response;
+    }
 
 }

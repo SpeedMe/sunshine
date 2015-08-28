@@ -34,7 +34,7 @@ public class SunPrivateChatController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(name = "/sendPrivateChat", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendPrivateChat", method = RequestMethod.POST)
     public FeResponse<String> sendPrivateChat(SunPrivateChat sunPrivateChat){
         FeResponse<String> response;
 
@@ -55,7 +55,7 @@ public class SunPrivateChatController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(name = "/readPrivateChat",method = RequestMethod.POST)
+    @RequestMapping(value = "/readPrivateChat",method = RequestMethod.POST)
     public FeResponse<String> readPrivateChat(SunPrivateChat sunPrivateChat){
         FeResponse<String> response;
 
@@ -75,7 +75,7 @@ public class SunPrivateChatController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(name = "/getChatsByUserId/{userId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getChatsByUserId/{userId}",method = RequestMethod.GET)
     public FeResponse<List> getChatsByUserId(@PathVariable String userId){
         FeResponse<List> response;
 

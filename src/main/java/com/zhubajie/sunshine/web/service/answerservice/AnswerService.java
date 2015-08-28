@@ -19,6 +19,14 @@ public interface AnswerService {
     boolean answerTopic(SunTopicAnswer sunTopicAnswer) throws Exception;
 
     /**
+     * 根据id获取回答信息
+     * @param topicAnswerId
+     * @return
+     * @throws Exception
+     */
+    SunTopicAnswer getAnswerById(Integer topicAnswerId) throws Exception;
+
+    /**
      * 感谢回答
      * @param sunAnswerThank
      * @return

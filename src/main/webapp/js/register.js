@@ -11,11 +11,11 @@
                 };
                 $.ajax({
                     type: 'POST',
-                    url: 'http://192.168.201.200/shine/sunUser/register',
+                    url: '/shine/sunUser/register',
                     data: data,
                     dataType: 'json',
                     success: function(json){
-                        if (json.state == 202) {
+                        if (json.state == 200) {
                         	alert("注册成功");
                         	window.location.href="login.html"; 
                         }

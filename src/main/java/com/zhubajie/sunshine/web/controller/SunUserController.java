@@ -45,7 +45,7 @@ public class SunUserController {
         try {
             userService.addUser(sunShineUser);
             session.setAttribute("sunShineUser", sunShineUser);
-            response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"注册成功");
+            response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"注册成功",sunShineUser);
         }catch (Exception e){
             logger.error(e.getMessage());
             response = new FeResponse<SunShineUser>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage());

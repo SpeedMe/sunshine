@@ -8,10 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,6 +18,7 @@ import java.util.List;
  * Created by huanglei on 2015/8/28.
  */
 @Controller
+@RequestMapping("/sunTopic")
 public class SunTopicController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -29,19 +27,20 @@ public class SunTopicController {
 
     /**
      * 根据频道id获取到所有话题，按照温度排序
+     *
      * @param channelId
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/getTopicsByChannelIdOrderByTemp", method = RequestMethod.GET)
-    public FeResponse<List> getTopicsByChannelIdOrderByTemp(Integer channelId){
+    public FeResponse<List> getTopicsByChannelIdOrderByTemp(Integer channelId) {
         FeResponse<List> response;
 
-        try{
+        try {
             List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(channelId);
 
-            response = new FeResponse<List>(HttpStatus.OK.value(),"查询成功",sunChannelTopics);
-        }catch (Exception e){
+            response = new FeResponse<List>(HttpStatus.OK.value(), "查询成功", sunChannelTopics);
+        } catch (Exception e) {
             logger.error(e.getMessage());
             response = new FeResponse<List>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
@@ -52,19 +51,24 @@ public class SunTopicController {
 
     /**
      * 得到某频道最大温度的话题
+     *
      * @param channelId
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/getMaxTempTopicByChannelId", method = RequestMethod.GET)
-    public FeResponse<SunChannelTopic> getMaxTempTopicByChannelId(Integer channelId){
+    @RequestMapping(value = "/getMaxTempTopicByChannelId/{channelId}", method = RequestMethod.GET)
+    public FeResponse<SunChannelTopic> getMaxTempTopicByChannelId(@PathVariable String channelId) {
         FeResponse<SunChannelTopic> response;
 
-        try{
-            List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(channelId);
+        try {
+            List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(Integer.parseInt(channelId));
 
-            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(),"查询成功",sunChannelTopics.get(sunChannelTopics.size()));
-        }catch (Exception e){
+            if (sunChannelTopics.size() == 0) {
+                response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "查询成功", null);
+            } else {
+                response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "查询成功", sunChannelTopics.get(sunChannelTopics.size()));
+            }
+        } catch (Exception e) {
             logger.error(e.getMessage());
             response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
@@ -75,19 +79,20 @@ public class SunTopicController {
 
     /**
      * 发布话题
+     *
      * @param sunChannelTopic
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/issueTopic", method = RequestMethod.GET)
-    public FeResponse<SunChannelTopic> issueTopic(@RequestBody SunChannelTopic sunChannelTopic){
+    public FeResponse<SunChannelTopic> issueTopic(@RequestBody SunChannelTopic sunChannelTopic) {
         FeResponse<SunChannelTopic> response;
 
-        try{
+        try {
             SunChannelTopic topicResult = topicService.issueTopic(sunChannelTopic);
 
-            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(),"发布成功",topicResult);
-        }catch (Exception e){
+            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "发布成功", topicResult);
+        } catch (Exception e) {
             logger.error(e.getMessage());
             response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
@@ -97,22 +102,23 @@ public class SunTopicController {
 
     /**
      * 关注话题
+     *
      * @param sunTopicAttention
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/followTopic", method = RequestMethod.POST)
-    public FeResponse<SunChannelTopic> followTopic(SunTopicAttention sunTopicAttention){
+    public FeResponse<SunChannelTopic> followTopic(SunTopicAttention sunTopicAttention) {
         FeResponse<SunChannelTopic> response;
 
-        try{
+        try {
             SunChannelTopic sunChannelTopic = topicService.followTopic(sunTopicAttention);
 
-            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(),"关注成功",sunChannelTopic);
-        }catch (Exception e){
+            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "关注成功", sunChannelTopic);
+        } catch (Exception e) {
             logger.error(e.getMessage());
 
-            response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+            response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
 
         return response;
@@ -120,22 +126,23 @@ public class SunTopicController {
 
     /**
      * 取消关注
+     *
      * @param sunTopicAttention
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/unfollowTopic", method = RequestMethod.POST)
-    public FeResponse<Boolean> unfollowTopic(SunTopicAttention sunTopicAttention){
+    public FeResponse<Boolean> unfollowTopic(SunTopicAttention sunTopicAttention) {
         FeResponse<Boolean> response;
 
-        try{
+        try {
             boolean unfollowFlag = topicService.unfollowTopic(sunTopicAttention);
 
-            response = new FeResponse<Boolean>(HttpStatus.OK.value(),"取消成功",unfollowFlag);
-        }catch (Exception e){
+            response = new FeResponse<Boolean>(HttpStatus.OK.value(), "取消成功", unfollowFlag);
+        } catch (Exception e) {
             logger.error(e.getMessage());
 
-            response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+            response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
 
         return response;
@@ -144,22 +151,23 @@ public class SunTopicController {
 
     /**
      * 是否已经关注话题
+     *
      * @param sunTopicAttention
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/hasFollowedTopic", method = RequestMethod.GET)
-    public FeResponse<Boolean> hasFollowedTopic(SunTopicAttention sunTopicAttention){
+    public FeResponse<Boolean> hasFollowedTopic(SunTopicAttention sunTopicAttention) {
         FeResponse<Boolean> response;
 
-        try{
+        try {
             boolean hasFollowedTopic = topicService.hasFollowedTopic(sunTopicAttention);
 
-            response = new FeResponse<Boolean>(HttpStatus.OK.value(),"请求成功",hasFollowedTopic);
-        }catch (Exception e){
+            response = new FeResponse<Boolean>(HttpStatus.OK.value(), "请求成功", hasFollowedTopic);
+        } catch (Exception e) {
             logger.error(e.getMessage());
 
-            response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+            response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
         return response;
     }

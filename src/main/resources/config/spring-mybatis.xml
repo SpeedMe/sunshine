@@ -74,7 +74,7 @@
     <!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
     <!-- spring与mybatis整合配置，扫描所有dao -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-          p:basePackage="org.salon.web.mapper"
+          p:basePackage="com.zhubajie.sunshine.web.mapper"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
     <!-- 开启事务注解驱动 -->

@@ -17,15 +17,15 @@
 
 
     <!--velocity模板配置-->
-    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/vm"/>
-        <property name="configLocation" value="classpath:properties/velocity.properties"/>
-    </bean>
+    <!--<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">-->
+        <!--<property name="resourceLoaderPath" value="/WEB-INF/vm"/>-->
+        <!--<property name="configLocation" value="classpath:properties/velocity.properties"/>-->
+    <!--</bean>-->
 
 
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
-        <!--<property name="contentType" value="text/html;charset=UTF-8"/>-->
-        <property name="prefix" value="/WEB-INF/vm/"/>
-        <property name="suffix" value=".vm"/>
-    </bean>
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">-->
+        <!--&lt;!&ndash;<property name="contentType" value="text/html;charset=UTF-8"/>&ndash;&gt;-->
+        <!--<property name="prefix" value="/WEB-INF/vm/"/>-->
+        <!--<property name="suffix" value=".vm"/>-->
+    <!--</bean>-->
 </beans>

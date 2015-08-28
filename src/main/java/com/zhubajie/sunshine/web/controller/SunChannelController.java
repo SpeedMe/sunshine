@@ -23,7 +23,7 @@ import java.util.List;
 public class SunChannelController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Resource(name = "channleService")
+    @Resource(name = "channelService")
     private ChannelService channelService;
 
     /**

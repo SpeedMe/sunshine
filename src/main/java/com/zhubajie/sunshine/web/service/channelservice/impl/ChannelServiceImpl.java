@@ -14,7 +14,7 @@ import java.util.List;
  * 频道接口实现类
  * Created by huanglei on 2015/8/28.
  */
-@Service("channleService")
+@Service("channelService")
 public class ChannelServiceImpl implements ChannelService {
 
     @Autowired

@@ -1,0 +1,94 @@
+.clearfix{
+
+}
+.logo{
+	width: 200px;
+	margin-top: 20px;
+}
+.bar {
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 10;
+	height: 60px;
+	padding-right: 10px;
+	padding-left: 10px;
+	background-color: white;
+	border-bottom:  #f5f5f5;
+	background-color: #fff;
+}
+.content{
+	background-color: #efefef;
+	padding-top: 60px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.table-view{
+	border: 0;
+	background-color: transparent;
+}
+.table-view-cell{
+	box-shadow: 1px 1px 2px #eee;
+	background-color: #fff;
+	padding: 8px;
+	margin-bottom: 15px;
+}
+.table-view-cell > a:not(.btn) {
+	position: relative;
+	display: block;
+	padding: inherit;
+	margin: 0;
+	overflow: hidden;
+	color: inherit;
+}
+.content-header{
+	padding: 10px 0;
+	clear: both;
+}
+.content-body{
+	clear: both;
+}
+.temperature {
+	color: #63c9d7;
+	width: 63px;
+	height: 45px;
+	line-height: 40px;
+	background: url(../img/p2.png) center no-repeat;
+	background-size: auto 100%;
+	float: left;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.temperature-small{
+	display: inline-block;
+	font-size: 10px;
+	padding-left: 2px;
+	height: 18px;
+	width: 33px;
+	background-color: #63c9d7;
+	color: #fff;
+	float: left;
+	font-family: sans-serif;
+	text-align: center;
+}
+h3.content-tit {
+	font-family: Microsoft YaHei;
+	height: 40px;
+	line-height: 40px;
+	color: #6a6a6a;
+	font-weight: normal;
+	font-size: 30px;
+	text-align: right;
+	overflow: hidden;
+	padding-right: 10px;
+}
+.content-inner{
+	margin-left: 40px;
+	color: #777;
+	font-family: Microsoft YaHei;
+}
+.table-view-cell p{
+	height: 55px;
+}
+

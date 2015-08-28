@@ -1,89 +1,52 @@
-package com.zhubajie.sunshine.web.service.topicservice.impl;
+package com.zhubajie.sunshine.web.service.answerservice.impl;
 
-import com.zhubajie.sunshine.core.constant.DatabaseParamConstant;
 import com.zhubajie.sunshine.core.constant.TemperatureConstant;
 import com.zhubajie.sunshine.web.mapper.SunChannelTopicMapper;
 import com.zhubajie.sunshine.web.mapper.SunShineChannelMapper;
 import com.zhubajie.sunshine.web.mapper.SunTopicAnswerMapper;
-import com.zhubajie.sunshine.web.mapper.SunTopicAttentionMapper;
-import com.zhubajie.sunshine.web.model.*;
-import com.zhubajie.sunshine.web.service.topicservice.TopicService;
+import com.zhubajie.sunshine.web.model.SunChannelTopic;
+import com.zhubajie.sunshine.web.model.SunShineChannel;
+import com.zhubajie.sunshine.web.model.SunTopicAnswer;
+import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
- * 话题操作接口实现类
+ * 话题回复接口实现类
  * Created by huanglei on 2015/8/28.
  */
-@Service("topicService")
-public class TopicServiceImpl implements TopicService {
+@Service("answerService")
+public class AnswerServiceImpl implements AnswerService {
+
+    @Autowired  //话题回复
+    private SunTopicAnswerMapper sunTopicAnswerMapper;
+
     @Autowired  //话题
     private SunChannelTopicMapper sunChannelTopicMapper;
 
     @Autowired  //频道
     private SunShineChannelMapper sunShineChannelMapper;
 
-    @Autowired  //话题关注
-    private SunTopicAttentionMapper sunTopicAttentionMapper;
-
-    @Autowired  //回答
-    private SunTopicAnswerMapper sunTopicAnswerMapper;
-
     /**
-     * 得到某频道下所有话题，按照温度排序
-     * @param channelId
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public List<SunChannelTopic> getTopicsByChannelIdOrderByTemp(Integer channelId) throws Exception {
-        SunChannelTopicExample sunChannelTopicExample = new SunChannelTopicExample();
-        sunChannelTopicExample.createCriteria().andChannelIdEqualTo(channelId);
-        sunChannelTopicExample.setOrderByClause(DatabaseParamConstant.TOPIC_TEMP);
-
-        return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
-    }
-
-    /**
-     * 发布话题
-     * @param sunChannelTopic
+     * 话题回复
+     * @param sunTopicAnswer
      * @return
      * @throws Exception
      */
     @Override
     @Transactional
-    public SunChannelTopic issueTopic(SunChannelTopic sunChannelTopic) throws Exception {
-        //插入话题
-        sunChannelTopicMapper.insertSelective(sunChannelTopic);
-
-        //增加频道温度
-        increaseChannleTemp(sunChannelTopic.getChannelId(), TemperatureConstant.TOPIC_ISSUE_TEMP);
-
-        return sunChannelTopicMapper.selectByPrimaryKey(sunChannelTopic.getTopicId());
-    }
-
-    /**
-     * 关注话题
-     * @param sunTopicAttention
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public SunChannelTopic attentionTopic(SunTopicAttention sunTopicAttention) throws Exception {
-
-        //插入关注表
-        sunTopicAttentionMapper.insertSelective(sunTopicAttention);
+    public boolean answerTopic(SunTopicAnswer sunTopicAnswer) throws Exception {
+        //插入回复表
+        sunTopicAnswerMapper.insertSelective(sunTopicAnswer);
 
         //增加话题温度
-        SunChannelTopic sunChannelTopic = increaseTopicTemp(sunTopicAttention.getTopicId(), TemperatureConstant.TOPIC_ATTENTION_TEMP);
+        SunChannelTopic sunChannelTopic = increaseTopicTemp(sunTopicAnswer.getTopicId(), TemperatureConstant.TOPIC_ANSWER_TEMP);
 
         //增加频道温度
-        increaseChannleTemp(sunChannelTopic.getChannelId(), TemperatureConstant.TOPIC_ATTENTION_TEMP);
+        increaseChannleTemp(sunChannelTopic.getChannelId(), TemperatureConstant.TOPIC_ANSWER_TEMP);
 
-        return sunChannelTopic;
+        return true;
     }
 
 
@@ -129,4 +92,6 @@ public class TopicServiceImpl implements TopicService {
 
         return sunTopicAnswer;
     }
+
+
 }

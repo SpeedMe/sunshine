@@ -98,13 +98,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunTopicAttention" >
+  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunTopicAttention" useGeneratedKeys="true" keyProperty="topic_attention_id">
     insert into topic_attention (topic_attention_id, user_id, topic_id, 
       topic_attention_time)
     values (#{topicAttentionId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{topicId,jdbcType=INTEGER}, 
       #{topicAttentionTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunTopicAttention" >
+  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunTopicAttention" useGeneratedKeys="true" keyProperty="topic_attention_id">
     insert into topic_attention
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="topicAttentionId != null" >

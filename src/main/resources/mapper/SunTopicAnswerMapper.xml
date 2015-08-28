@@ -124,7 +124,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+  <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" useGeneratedKeys="true" keyProperty="topic_answer_id">
     insert into topic_answer (topic_answer_id, topic_id, user_id, 
       topic_answer_temp, topic_answer_time, is_anonymity, 
       topic_answer_content)
@@ -132,7 +132,7 @@
       #{topicAnswerTemp,jdbcType=INTEGER}, #{topicAnswerTime,jdbcType=TIMESTAMP}, #{isAnonymity,jdbcType=BIT}, 
       #{topicAnswerContent,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" >
+  <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunTopicAnswer" useGeneratedKeys="true" keyProperty="topic_answer_id">
     insert into topic_answer
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="topicAnswerId != null" >

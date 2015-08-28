@@ -1,6 +1,7 @@
 package com.zhubajie.sunshine.web.service.topicservice;
 
 import com.zhubajie.sunshine.web.model.SunChannelTopic;
+import com.zhubajie.sunshine.web.model.SunTopicAttention;
 
 import java.util.List;
 
@@ -24,4 +25,12 @@ public interface TopicService {
      * @throws Exception
      */
     SunChannelTopic issueTopic(SunChannelTopic sunChannelTopic) throws Exception;
+
+    /**
+     * 话题关注
+     * @param sunTopicAttention
+     * @return
+     * @throws Exception
+     */
+    SunChannelTopic attentionTopic(SunTopicAttention sunTopicAttention) throws Exception;
 }

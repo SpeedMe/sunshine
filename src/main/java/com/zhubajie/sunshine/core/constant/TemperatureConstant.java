@@ -12,6 +12,10 @@ public class TemperatureConstant {
     //回答问题获得温度值
     public final static Integer TOPIC_ANSWER_TEMP = 5;
 
+    //关注话题获得温度值
+    public final static Integer TOPIC_ATTENTION_TEMP = 5;
+
     //感谢回答获得温度
     public final static Integer ANSWER_THANK_TEMP = 1;
+
 }

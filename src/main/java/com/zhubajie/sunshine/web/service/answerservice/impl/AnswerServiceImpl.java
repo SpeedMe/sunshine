@@ -90,6 +90,20 @@ public class AnswerServiceImpl implements AnswerService {
         return sunAnswerThankMapper.selectByExample(sunAnswerThankExample).size() == 0 ? false : true;
     }
 
+    /**
+     * 得到话题回答数量
+     * @param topicId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Integer countTopicAnswer(Integer topicId) throws Exception {
+        SunTopicAnswerExample sunTopicAnswerExample = new SunTopicAnswerExample();
+        sunTopicAnswerExample.createCriteria().andTopicIdEqualTo(topicId);
+
+        return sunTopicAnswerMapper.selectByExample(sunTopicAnswerExample).size();
+    }
+
 
     /**
      * 增加频道温度

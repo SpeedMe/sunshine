@@ -31,4 +31,12 @@ public interface AnswerService {
      * @throws Exception
      */
     boolean hasThankedAnswer(SunAnswerThank sunAnswerThank) throws Exception;
+
+    /**
+     * 得到话题回答数量
+     * @param topicId
+     * @return
+     * @throws Exception
+     */
+    Integer countTopicAnswer(Integer topicId) throws Exception;
 }

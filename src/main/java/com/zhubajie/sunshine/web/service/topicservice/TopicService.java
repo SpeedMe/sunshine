@@ -51,6 +51,14 @@ public interface TopicService {
     boolean hasFollowedTopic(SunTopicAttention sunTopicAttention) throws Exception;
 
     /**
+     * 得到话题关注量
+     * @param topicId
+     * @return
+     * @throws Exception
+     */
+    Integer countFollowTopic(Integer topicId) throws Exception;
+
+    /**
      * 根据名字模糊查找话题
      * @param topicName
      * @return

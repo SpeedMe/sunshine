@@ -123,6 +123,20 @@ public class TopicServiceImpl implements TopicService {
     }
 
     /**
+     * 获取到话题关注量
+     * @param topicId 话题id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Integer countFollowTopic(Integer topicId) throws Exception {
+        SunTopicAttentionExample sunTopicAttentionExample = new SunTopicAttentionExample();
+        sunTopicAttentionExample.createCriteria().andTopicIdEqualTo(topicId);
+
+        return sunTopicAttentionMapper.selectByExample(sunTopicAttentionExample).size();
+    }
+
+    /**
      * 根据名字模糊查询话题
      * @param topicName
      * @return

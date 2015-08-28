@@ -48,6 +48,11 @@ public class TopicServiceImpl implements TopicService {
         return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
     }
 
+    @Override
+    public SunChannelTopic getTopicByTopicId(Integer topicId) throws Exception {
+        return sunChannelTopicMapper.selectByPrimaryKey(topicId);
+    }
+
     /**
      * 发布话题
      * @param sunChannelTopic

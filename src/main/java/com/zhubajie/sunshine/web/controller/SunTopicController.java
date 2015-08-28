@@ -172,4 +172,26 @@ public class SunTopicController {
         return response;
     }
 
+    /**
+     * 根据topicId获取话题
+     *
+     * @param topicId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getTopicByTopicId/{topicId}", method = RequestMethod.GET)
+    public FeResponse<SunChannelTopic> getTopicByTopicId(String topicId) {
+        FeResponse<SunChannelTopic> response;
+
+        try {
+            SunChannelTopic sunChannelTopic = topicService.getTopicByTopicId(Integer.parseInt(topicId));
+            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "查找成功", sunChannelTopic);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+        }
+
+        return response;
+    }
+
 }

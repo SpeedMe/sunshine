@@ -52,5 +52,19 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    /**
+     * 根据名字模糊查询用户
+     * @param nickname
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SunShineUser> queryUserByName(String nickname) throws Exception {
+        SunShineUserExample sunShineUserExample = new SunShineUserExample();
+        sunShineUserExample.createCriteria().andNicknameLike("%" + nickname + "%");
+
+        return sunShineUserMapper.selectByExample(sunShineUserExample);
+    }
+
 
 }

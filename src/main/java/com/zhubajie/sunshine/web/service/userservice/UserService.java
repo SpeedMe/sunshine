@@ -2,6 +2,8 @@ package com.zhubajie.sunshine.web.service.userservice;
 
 import com.zhubajie.sunshine.web.model.SunShineUser;
 
+import java.util.List;
+
 /**
  * 用户操作接口
  * Created by huanglei on 2015/8/28.
@@ -36,4 +38,12 @@ public interface UserService {
      * @throws Exception
      */
     boolean login(SunShineUser sunShineUser) throws Exception;
+
+    /**
+     * 模糊查询用户
+     * @param nickname
+     * @return
+     * @throws Exception
+     */
+    List<SunShineUser> queryUserByName(String nickname) throws Exception;
 }

@@ -49,4 +49,29 @@ public interface TopicService {
      * @throws Exception
      */
     boolean hasFollowedTopic(SunTopicAttention sunTopicAttention) throws Exception;
+
+    /**
+     * 根据名字模糊查找话题
+     * @param topicName
+     * @return
+     * @throws Exception
+     */
+    List<SunChannelTopic> queryTopicByName(String topicName) throws Exception;
+
+    /**
+     * 查询用户下面所有发布的话题
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    List<SunChannelTopic> queryIssueTopicByUserId(Integer userId) throws Exception;
+
+    /**
+     * 查询用户下面关注的话题
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    List<SunChannelTopic> queryFollowTopicByUserId(Integer userId) throws Exception;
+
 }

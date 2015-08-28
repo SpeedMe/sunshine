@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -119,6 +120,58 @@ public class TopicServiceImpl implements TopicService {
         sunTopicAttentionExample.createCriteria().andUserIdEqualTo(sunTopicAttention.getUserId()).andTopicIdEqualTo(sunTopicAttention.getTopicId());
 
         return sunTopicAttentionMapper.selectByExample(sunTopicAttentionExample).size() == 0 ? false : true;
+    }
+
+    /**
+     * 根据名字模糊查询话题
+     * @param topicName
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SunChannelTopic> queryTopicByName(String topicName) throws Exception {
+        SunChannelTopicExample sunChannelTopicExample = new SunChannelTopicExample();
+        sunChannelTopicExample.createCriteria().andTopicNameLike("%" + topicName + "%");
+
+        return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
+    }
+
+    /**
+     * 查询用户下面所有发布的话题
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SunChannelTopic> queryIssueTopicByUserId(Integer userId) throws Exception {
+        SunChannelTopicExample sunChannelTopicExample = new SunChannelTopicExample();
+        sunChannelTopicExample.createCriteria().andUserIdEqualTo(userId);
+
+        return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
+    }
+
+    /**
+     * 查询用户关注的话题
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SunChannelTopic> queryFollowTopicByUserId(Integer userId) throws Exception {
+        //找出用户关注的所有话题id
+        List<Integer> topicIds = new LinkedList<Integer>();
+        SunTopicAttentionExample sunTopicAttentionExample = new SunTopicAttentionExample();
+        sunTopicAttentionExample.createCriteria().andUserIdEqualTo(userId);
+        List<SunTopicAttention> sunTopicAttentions = sunTopicAttentionMapper.selectByExample(sunTopicAttentionExample);
+
+        for (SunTopicAttention sunTopicAttention : sunTopicAttentions){
+            topicIds.add(sunTopicAttention.getTopicId());
+        }
+
+        SunChannelTopicExample sunChannelTopicExample = new SunChannelTopicExample();
+        sunChannelTopicExample.createCriteria().andTopicIdIn(topicIds);
+
+        return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
     }
 
 

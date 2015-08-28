@@ -3,6 +3,8 @@ package com.zhubajie.sunshine.web.service.answerservice;
 import com.zhubajie.sunshine.web.model.SunAnswerThank;
 import com.zhubajie.sunshine.web.model.SunTopicAnswer;
 
+import java.util.List;
+
 /**
  * 话题回复接口
  * Created by huanglei on 2015/8/28.
@@ -39,4 +41,6 @@ public interface AnswerService {
      * @throws Exception
      */
     Integer countTopicAnswer(Integer topicId) throws Exception;
+
+    List<SunTopicAnswer> queryAnswersByTopicIdOrderByTemp(Integer topicId) throws Exception;
 }

@@ -66,7 +66,7 @@ public class SunTopicController {
             if (sunChannelTopics.size() == 0) {
                 response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "查询成功", null);
             } else {
-                response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "查询成功", sunChannelTopics.get(sunChannelTopics.size()));
+                response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "查询成功", sunChannelTopics.get(sunChannelTopics.size() - 1));
             }
         } catch (Exception e) {
             logger.error(e.getMessage());

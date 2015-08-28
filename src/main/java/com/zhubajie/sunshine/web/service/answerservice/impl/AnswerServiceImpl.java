@@ -1,5 +1,6 @@
 package com.zhubajie.sunshine.web.service.answerservice.impl;
 
+import com.zhubajie.sunshine.core.constant.DatabaseParamConstant;
 import com.zhubajie.sunshine.core.constant.TemperatureConstant;
 import com.zhubajie.sunshine.web.mapper.SunAnswerThankMapper;
 import com.zhubajie.sunshine.web.mapper.SunChannelTopicMapper;
@@ -10,6 +11,8 @@ import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 话题回复接口实现类
@@ -102,6 +105,22 @@ public class AnswerServiceImpl implements AnswerService {
         sunTopicAnswerExample.createCriteria().andTopicIdEqualTo(topicId);
 
         return sunTopicAnswerMapper.selectByExample(sunTopicAnswerExample).size();
+    }
+
+    /**
+     * 查找话题回复，按照温度排序
+     * @param topicId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SunTopicAnswer> queryAnswersByTopicIdOrderByTemp(Integer topicId) throws Exception {
+
+        SunTopicAnswerExample sunTopicAnswerExample = new SunTopicAnswerExample();
+        sunTopicAnswerExample.setOrderByClause(DatabaseParamConstant.ANSWER_TEMP);
+        sunTopicAnswerExample.createCriteria().andTopicIdEqualTo(topicId);
+
+        return sunTopicAnswerMapper.selectByExample(sunTopicAnswerExample);
     }
 
 

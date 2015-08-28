@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 回答Controller
@@ -89,5 +91,42 @@ public class SunAnswerController {
 
         return response;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/queryAnswersByTopicIdOrderByTemp/{topicId}",method = RequestMethod.GET)
+    public FeResponse<List> queryAnswersByTopicIdOrderByTemp(@PathVariable String topicId){
+        FeResponse<List> response;
+
+        try {
+            List<SunTopicAnswer> sunTopicAnswers = answerService.queryAnswersByTopicIdOrderByTemp(Integer.parseInt(topicId));
+            response = new FeResponse<List>(HttpStatus.OK.value(),"查询成功",sunTopicAnswers);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<List>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+
+        return response;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/queryMaxTempAnswerByTopicId/{topicId}",method = RequestMethod.GET)
+    public FeResponse<SunTopicAnswer> queryMaxTempAnswerByTopicId(@PathVariable String topicId){
+        FeResponse<SunTopicAnswer> response;
+
+        try {
+            List<SunTopicAnswer> sunTopicAnswers = answerService.queryAnswersByTopicIdOrderByTemp(Integer.parseInt(topicId));
+            if (sunTopicAnswers.size() == 0){
+                response = new FeResponse<SunTopicAnswer>(HttpStatus.OK.value(),"查询成功",null);
+            }{
+                response = new FeResponse<SunTopicAnswer>(HttpStatus.OK.value(),"查询成功",sunTopicAnswers.get(sunTopicAnswers.size()-1));
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<SunTopicAnswer>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+
+        return response;
+    }
+
 
 }

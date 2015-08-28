@@ -11,4 +11,7 @@ public class DatabaseParamConstant {
 
     //话题温度
     public final static String TOPIC_TEMP = "topic_temp";
+
+    //回复温度
+    public final static String ANSWER_TEMP = "topic_answer_temp";
 }

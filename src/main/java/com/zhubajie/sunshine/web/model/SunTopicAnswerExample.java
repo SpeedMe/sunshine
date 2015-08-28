@@ -404,6 +404,66 @@ public class SunTopicAnswerExample {
             addCriterion("topic_answer_time not between", value1, value2, "topicAnswerTime");
             return (Criteria) this;
         }
+
+        public Criteria andIsAnonymityIsNull() {
+            addCriterion("is_anonymity is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityIsNotNull() {
+            addCriterion("is_anonymity is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityEqualTo(Boolean value) {
+            addCriterion("is_anonymity =", value, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityNotEqualTo(Boolean value) {
+            addCriterion("is_anonymity <>", value, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityGreaterThan(Boolean value) {
+            addCriterion("is_anonymity >", value, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_anonymity >=", value, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityLessThan(Boolean value) {
+            addCriterion("is_anonymity <", value, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_anonymity <=", value, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityIn(List<Boolean> values) {
+            addCriterion("is_anonymity in", values, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityNotIn(List<Boolean> values) {
+            addCriterion("is_anonymity not in", values, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_anonymity between", value1, value2, "isAnonymity");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAnonymityNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_anonymity not between", value1, value2, "isAnonymity");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

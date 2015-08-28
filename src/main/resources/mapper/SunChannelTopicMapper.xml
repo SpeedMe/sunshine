@@ -8,6 +8,7 @@
     <result column="topic_temp" property="topicTemp" jdbcType="INTEGER" />
     <result column="topic_name" property="topicName" jdbcType="VARCHAR" />
     <result column="topic_create_time" property="topicCreateTime" jdbcType="TIMESTAMP" />
+    <result column="is_anonymity" property="isAnonymity" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.zhubajie.sunshine.web.model.SunChannelTopic" extends="BaseResultMap" >
     <result column="topic_content" property="topicContent" jdbcType="LONGVARCHAR" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    topic_id, channel_id, user_id, topic_temp, topic_name, topic_create_time
+    topic_id, channel_id, user_id, topic_temp, topic_name, topic_create_time, is_anonymity
   </sql>
   <sql id="Blob_Column_List" >
     topic_content
@@ -127,10 +128,10 @@
   <insert id="insert" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" >
     insert into channel_topic (topic_id, channel_id, user_id, 
       topic_temp, topic_name, topic_create_time, 
-      topic_content)
+      is_anonymity, topic_content)
     values (#{topicId,jdbcType=INTEGER}, #{channelId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
       #{topicTemp,jdbcType=INTEGER}, #{topicName,jdbcType=VARCHAR}, #{topicCreateTime,jdbcType=TIMESTAMP}, 
-      #{topicContent,jdbcType=LONGVARCHAR})
+      #{isAnonymity,jdbcType=BIT}, #{topicContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhubajie.sunshine.web.model.SunChannelTopic" >
     insert into channel_topic
@@ -152,6 +153,9 @@
       </if>
       <if test="topicCreateTime != null" >
         topic_create_time,
+      </if>
+      <if test="isAnonymity != null" >
+        is_anonymity,
       </if>
       <if test="topicContent != null" >
         topic_content,
@@ -175,6 +179,9 @@
       </if>
       <if test="topicCreateTime != null" >
         #{topicCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAnonymity != null" >
+        #{isAnonymity,jdbcType=BIT},
       </if>
       <if test="topicContent != null" >
         #{topicContent,jdbcType=LONGVARCHAR},
@@ -208,6 +215,9 @@
       <if test="record.topicCreateTime != null" >
         topic_create_time = #{record.topicCreateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.isAnonymity != null" >
+        is_anonymity = #{record.isAnonymity,jdbcType=BIT},
+      </if>
       <if test="record.topicContent != null" >
         topic_content = #{record.topicContent,jdbcType=LONGVARCHAR},
       </if>
@@ -224,6 +234,7 @@
       topic_temp = #{record.topicTemp,jdbcType=INTEGER},
       topic_name = #{record.topicName,jdbcType=VARCHAR},
       topic_create_time = #{record.topicCreateTime,jdbcType=TIMESTAMP},
+      is_anonymity = #{record.isAnonymity,jdbcType=BIT},
       topic_content = #{record.topicContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +247,8 @@
       user_id = #{record.userId,jdbcType=INTEGER},
       topic_temp = #{record.topicTemp,jdbcType=INTEGER},
       topic_name = #{record.topicName,jdbcType=VARCHAR},
-      topic_create_time = #{record.topicCreateTime,jdbcType=TIMESTAMP}
+      topic_create_time = #{record.topicCreateTime,jdbcType=TIMESTAMP},
+      is_anonymity = #{record.isAnonymity,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,6 +271,9 @@
       <if test="topicCreateTime != null" >
         topic_create_time = #{topicCreateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isAnonymity != null" >
+        is_anonymity = #{isAnonymity,jdbcType=BIT},
+      </if>
       <if test="topicContent != null" >
         topic_content = #{topicContent,jdbcType=LONGVARCHAR},
       </if>
@@ -272,6 +287,7 @@
       topic_temp = #{topicTemp,jdbcType=INTEGER},
       topic_name = #{topicName,jdbcType=VARCHAR},
       topic_create_time = #{topicCreateTime,jdbcType=TIMESTAMP},
+      is_anonymity = #{isAnonymity,jdbcType=BIT},
       topic_content = #{topicContent,jdbcType=LONGVARCHAR}
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
@@ -281,7 +297,8 @@
       user_id = #{userId,jdbcType=INTEGER},
       topic_temp = #{topicTemp,jdbcType=INTEGER},
       topic_name = #{topicName,jdbcType=VARCHAR},
-      topic_create_time = #{topicCreateTime,jdbcType=TIMESTAMP}
+      topic_create_time = #{topicCreateTime,jdbcType=TIMESTAMP},
+      is_anonymity = #{isAnonymity,jdbcType=BIT}
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -19,6 +19,12 @@ public class TopicServiceImpl implements TopicService {
     @Autowired
     private SunChannelTopicMapper sunChannelTopicMapper;
 
+    /**
+     * 得到某频道下所有话题，按照温度排序
+     * @param channelId
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<SunChannelTopic> getTopicsByChannelIdOrderByTemp(Integer channelId) throws Exception {
         SunChannelTopicExample sunChannelTopicExample = new SunChannelTopicExample();
@@ -26,5 +32,11 @@ public class TopicServiceImpl implements TopicService {
         sunChannelTopicExample.setOrderByClause(DatabaseParamConstant.TOPIC_TEMP);
 
         return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
+    }
+
+    @Override
+    public SunChannelTopic issueTopic(SunChannelTopic sunChannelTopic) throws Exception {
+
+        return null;
     }
 }

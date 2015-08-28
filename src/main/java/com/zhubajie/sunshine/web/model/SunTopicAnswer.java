@@ -13,6 +13,8 @@ public class SunTopicAnswer {
 
     private Date topicAnswerTime;
 
+    private Boolean isAnonymity;
+
     private String topicAnswerContent;
 
     public Integer getTopicAnswerId() {
@@ -53,6 +55,14 @@ public class SunTopicAnswer {
 
     public void setTopicAnswerTime(Date topicAnswerTime) {
         this.topicAnswerTime = topicAnswerTime;
+    }
+
+    public Boolean getIsAnonymity() {
+        return isAnonymity;
+    }
+
+    public void setIsAnonymity(Boolean isAnonymity) {
+        this.isAnonymity = isAnonymity;
     }
 
     public String getTopicAnswerContent() {

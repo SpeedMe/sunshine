@@ -9,5 +9,19 @@ import java.util.List;
  * Created by huanglei on 2015/8/28.
  */
 public interface TopicService {
+    /**
+     * 得到某频道下所有话题，按照温度排序
+     * @param channelId
+     * @return
+     * @throws Exception
+     */
     List<SunChannelTopic> getTopicsByChannelIdOrderByTemp(Integer channelId) throws Exception;
+
+    /**
+     * 发布话题
+     * @param sunChannelTopic
+     * @return
+     * @throws Exception
+     */
+    SunChannelTopic issueTopic(SunChannelTopic sunChannelTopic) throws Exception;
 }

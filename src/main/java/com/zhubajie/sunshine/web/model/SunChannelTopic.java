@@ -15,6 +15,8 @@ public class SunChannelTopic {
 
     private Date topicCreateTime;
 
+    private Boolean isAnonymity;
+
     private String topicContent;
 
     public Integer getTopicId() {
@@ -63,6 +65,14 @@ public class SunChannelTopic {
 
     public void setTopicCreateTime(Date topicCreateTime) {
         this.topicCreateTime = topicCreateTime;
+    }
+
+    public Boolean getIsAnonymity() {
+        return isAnonymity;
+    }
+
+    public void setIsAnonymity(Boolean isAnonymity) {
+        this.isAnonymity = isAnonymity;
     }
 
     public String getTopicContent() {

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +55,7 @@ public class SunTopicController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/getTopicsByChannelIdOrderByTemp", method = RequestMethod.GET)
+    @RequestMapping(value = "/getMaxTempTopicByChannelId", method = RequestMethod.GET)
     public FeResponse<SunChannelTopic> getMaxTempTopicByChannelId(Integer channelId){
         FeResponse<SunChannelTopic> response;
 
@@ -62,6 +63,29 @@ public class SunTopicController {
             List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(channelId);
 
             response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(),"查询成功",sunChannelTopics.get(sunChannelTopics.size()));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+        }
+
+        return response;
+    }
+
+
+    /**
+     * 发布话题
+     * @param sunChannelTopic
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/issueTopic", method = RequestMethod.GET)
+    public FeResponse<SunChannelTopic> issueTopic(@RequestBody SunChannelTopic sunChannelTopic){
+        FeResponse<SunChannelTopic> response;
+
+        try{
+            SunChannelTopic topicResult = topicService.issueTopic(sunChannelTopic);
+
+            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(),"发布成功",topicResult);
         }catch (Exception e){
             logger.error(e.getMessage());
             response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);

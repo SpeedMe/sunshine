@@ -1,12 +1,16 @@
 package com.zhubajie.sunshine.web.service.topicservice.impl;
 
 import com.zhubajie.sunshine.core.constant.DatabaseParamConstant;
+import com.zhubajie.sunshine.core.constant.TemperatureConstant;
 import com.zhubajie.sunshine.web.mapper.SunChannelTopicMapper;
+import com.zhubajie.sunshine.web.mapper.SunShineChannelMapper;
 import com.zhubajie.sunshine.web.model.SunChannelTopic;
 import com.zhubajie.sunshine.web.model.SunChannelTopicExample;
+import com.zhubajie.sunshine.web.model.SunShineChannel;
 import com.zhubajie.sunshine.web.service.topicservice.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +22,9 @@ import java.util.List;
 public class TopicServiceImpl implements TopicService {
     @Autowired
     private SunChannelTopicMapper sunChannelTopicMapper;
+
+    @Autowired
+    private SunShineChannelMapper sunShineChannelMapper;
 
     /**
      * 得到某频道下所有话题，按照温度排序
@@ -34,9 +41,23 @@ public class TopicServiceImpl implements TopicService {
         return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
     }
 
+    /**
+     * 发布话题
+     * @param sunChannelTopic
+     * @return
+     * @throws Exception
+     */
     @Override
+    @Transactional
     public SunChannelTopic issueTopic(SunChannelTopic sunChannelTopic) throws Exception {
+        //插入话题
+        sunChannelTopicMapper.insertSelective(sunChannelTopic);
 
-        return null;
+        //增加频道温度
+        SunShineChannel sunShineChannel = sunShineChannelMapper.selectByPrimaryKey(sunChannelTopic.getChannelId());
+        sunShineChannel.setChannelTemp(sunShineChannel.getChannelTemp() + TemperatureConstant.TOPIC_ISSUE_TEMP);
+        sunShineChannelMapper.insert(sunShineChannel);
+
+        return sunChannelTopicMapper.selectByPrimaryKey(sunChannelTopic.getTopicId());
     }
 }

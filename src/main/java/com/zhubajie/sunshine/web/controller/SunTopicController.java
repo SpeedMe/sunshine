@@ -84,8 +84,8 @@ public class SunTopicController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/issueTopic", method = RequestMethod.GET)
-    public FeResponse<SunChannelTopic> issueTopic(@RequestBody SunChannelTopic sunChannelTopic) {
+    @RequestMapping(value = "/issueTopic", method = RequestMethod.POST)
+    public FeResponse<SunChannelTopic> issueTopic(SunChannelTopic sunChannelTopic) {
         FeResponse<SunChannelTopic> response;
 
         try {

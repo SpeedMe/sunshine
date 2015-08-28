@@ -2,6 +2,7 @@ package com.zhubajie.sunshine.web.controller;
 
 import com.zhubajie.sunshine.core.entity.FeResponse;
 import com.zhubajie.sunshine.web.model.SunChannelTopic;
+import com.zhubajie.sunshine.web.model.SunTopicAttention;
 import com.zhubajie.sunshine.web.service.topicservice.TopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,5 +95,73 @@ public class SunTopicController {
         return response;
     }
 
+    /**
+     * 关注话题
+     * @param sunTopicAttention
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public FeResponse<SunChannelTopic> followTopic(SunTopicAttention sunTopicAttention){
+        FeResponse<SunChannelTopic> response;
+
+        try{
+            SunChannelTopic sunChannelTopic = topicService.followTopic(sunTopicAttention);
+
+            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(),"关注成功",sunChannelTopic);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+
+            response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+
+        return response;
+    }
+
+    /**
+     * 取消关注
+     * @param sunTopicAttention
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public FeResponse<Boolean> unfollowTopic(SunTopicAttention sunTopicAttention){
+        FeResponse<Boolean> response;
+
+        try{
+            boolean unfollowFlag = topicService.unfollowTopic(sunTopicAttention);
+
+            response = new FeResponse<Boolean>(HttpStatus.OK.value(),"取消成功",unfollowFlag);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+
+            response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+
+        return response;
+    }
+
+
+    /**
+     * 是否已经关注话题
+     * @param sunTopicAttention
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public FeResponse<Boolean> hasFollowedTopic(SunTopicAttention sunTopicAttention){
+        FeResponse<Boolean> response;
+
+        try{
+            boolean hasFollowedTopic = topicService.hasFollowedTopic(sunTopicAttention);
+
+            response = new FeResponse<Boolean>(HttpStatus.OK.value(),"请求成功",hasFollowedTopic);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+
+            response = new FeResponse<Boolean>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+        return response;
+    }
 
 }

@@ -7,13 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @description:
@@ -97,4 +95,48 @@ public class SunUserController {
 
         return response;
     }
+
+    /**
+     * 根据id得到用户信息
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public FeResponse<SunShineUser> getUserById(@PathVariable String userId){
+        FeResponse<SunShineUser> response;
+
+        try{
+            SunShineUser sunShineUser = userService.getUserById(Integer.parseInt(userId));
+
+            response = new FeResponse<SunShineUser>(HttpStatus.OK.value(),"查找成功", sunShineUser);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<SunShineUser>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+        return response;
+    }
+
+    /**
+     * 根据名字模糊查找用户
+     * @param nickname
+     * @return
+     */
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    @ResponseBody
+    public FeResponse<List> queryUserByName(String nickname){
+        FeResponse<List> response;
+
+        try{
+            List<SunShineUser> sunShineUsers = userService.queryUserByName(nickname);
+
+            response = new FeResponse<List>(HttpStatus.OK.value(),"查找成功", sunShineUsers);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<List>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+        }
+
+        return response;
+    }
+
 }

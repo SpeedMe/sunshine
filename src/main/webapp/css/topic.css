@@ -465,4 +465,14 @@ body .title{
 	text-overflow: ellipsis;
 
 }
+.topic-body .short-topic-info .content-detail {
+	padding-bottom: 0;
+	margin-bottom: 8px;
+	height: 60px;
+	line-height: 20px;
+	overflow: hidden;
+}
+.writer-info img{
+	height: 25px;
+}
 

@@ -34,11 +34,8 @@
 			$(".center-btn").on("click",function(){
 				$("#mySlider").addClass("show");
 			});
-			$('.topic-body').bind('swiperight swiperightup swiperightdown',function(){
-				$("#mySlider").addClass("show");
-				return false;
-			});
-			$('#mySlider').bind('swipeleft swipeleftup swipeleftdown',function(){
+
+			$('#mySlider').bind('swipeleft swipeleftup',function(){
 				$("#mySlider").removeClass("show");
 				return false;
 			});
@@ -78,7 +75,7 @@
 					 	var html = '<div class="topic-info" data-topic="'+locdata[idx].topicId+'">'
 						        +'    <p class="writer-info">'
 						        +'        <span class="writer-name">来自匿名</span>'
-						        +'        <img src="http://placehold.it/25x25" alt="">'
+						        +'        <img src="img/person.png" alt="">'
 						        +'        <span class="temperature-small fr">'+locdata[idx].topicTemp+'° </span>'
 						        +'    </p>'
 						        +'    <p class="content-detail">'
@@ -131,6 +128,14 @@
 			$.get('/shine/sunUser/loginState',function(data){
 				var loc = topic._param;
 				loc.login = data;
+				var stateName = data.data==null ? "未登录":data.data.nickname;
+				//var stateName = data.data.nickname||"未登录";
+				$(".p-name").html(stateName);
+				if(stateName == "未登录"){
+					$(".p-worlds").hide();
+				}else{
+					$(".p-worlds").show();
+				}
 				if(loc.login.meta.message === "已登录"){
 					$('.bottom-btn').eq(1).removeClass('no-login');
 					$('.bottom-btn').eq(0).addClass('no-login');

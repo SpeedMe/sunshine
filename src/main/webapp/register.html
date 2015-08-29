@@ -11,13 +11,13 @@
 </head>
 <body>
     <header class="bar bar-nav register-header">
-        <button class="btn btn-link btn-nav pull-left">
+        <a href="javascript:history.back(-1)"><button class="btn btn-link btn-nav pull-left">
             <span class="icon icon-left-nav"></span>
-            注册
-        </button>
-        <button class="btn btn-link btn-nav pull-right">
+            返回
+        </button></a>
+        <a href="login.html"><button class="btn btn-link btn-nav pull-right">
             登录
-        </button>
+        </button></a>
     </header>
     <div class="content">
         <div class="user-head">
@@ -34,14 +34,12 @@
             </div>
             <div class="input-wrap">
                 <i class="icon icon-password"></i>
-                <input type="text" name="password" placeholder="请输入密码">
+                <input type="password" name="password" placeholder="请输入密码">
             </div>
             <button class="btn btn-positive btn-block J-register-btn">完成</button>
         </form>
     </div>
 </body>
-    <script src="ratchet/js/ratchet.js"></script>
-    <script src="ratchet/js/sliders.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/register.js"></script>
 </html>

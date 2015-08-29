@@ -147,14 +147,14 @@ public class SunAnswerController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(name = "/getAnswerById/{topicAnswerId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getAnswerById/{topicAnswerId}",method = RequestMethod.GET)
     public FeResponse<SunTopicAnswer> getAnswerById(@PathVariable String topicAnswerId){
         FeResponse<SunTopicAnswer> response;
 
         try {
             SunTopicAnswer sunTopicAnswer = answerService.getAnswerById(Integer.parseInt(topicAnswerId));
 
-            sunTopicAnswer.setTopicAnswerTime(DateUtil.parseDate(DateUtil.getDateStr(sunTopicAnswer.getTopicAnswerTime()), DateStyle.YYYY_MM_DD_CN.getValue()));
+            sunTopicAnswer.setTopicAnswerTime(DateUtil.parseDate(DateUtil.formateDate(sunTopicAnswer.getTopicAnswerTime(), DateStyle.YYYY_MM_DD_CN.getValue()),DateStyle.YYYY_MM_DD_CN.getValue()));
 
             response = new FeResponse<SunTopicAnswer>(HttpStatus.OK.value(),"查找成功",sunTopicAnswer);
         }catch (Exception e){

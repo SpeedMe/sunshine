@@ -180,7 +180,7 @@ public class SunTopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/getTopicByTopicId/{topicId}", method = RequestMethod.GET)
-    public FeResponse<SunChannelTopic> getTopicByTopicId(String topicId) {
+    public FeResponse<SunChannelTopic> getTopicByTopicId(@PathVariable String topicId) {
         FeResponse<SunChannelTopic> response;
 
         try {

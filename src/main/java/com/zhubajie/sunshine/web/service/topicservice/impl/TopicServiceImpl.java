@@ -100,8 +100,12 @@ public class TopicServiceImpl implements TopicService {
      */
     @Override
     public boolean unfollowTopic(SunTopicAttention sunTopicAttention) throws Exception {
+
+        SunTopicAttentionExample sunTopicAttentionExample = new SunTopicAttentionExample();
+        sunTopicAttentionExample.createCriteria().andTopicIdEqualTo(sunTopicAttention.getTopicId()).andUserIdEqualTo(sunTopicAttention.getUserId());
+
         //删除关注记录
-        sunTopicAttentionMapper.deleteByPrimaryKey(sunTopicAttention.getTopicAttentionId());
+        sunTopicAttentionMapper.deleteByExample(sunTopicAttentionExample);
 
         //减少话题温度
         SunChannelTopic sunChannelTopic = increaseTopicTemp(sunTopicAttention.getTopicId(), -TemperatureConstant.TOPIC_ATTENTION_TEMP);

@@ -345,6 +345,76 @@ public class SunTopicAnswerExample {
             return (Criteria) this;
         }
 
+        public Criteria andTopicAnswerContentIsNull() {
+            addCriterion("topic_answer_content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentIsNotNull() {
+            addCriterion("topic_answer_content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentEqualTo(String value) {
+            addCriterion("topic_answer_content =", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentNotEqualTo(String value) {
+            addCriterion("topic_answer_content <>", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentGreaterThan(String value) {
+            addCriterion("topic_answer_content >", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentGreaterThanOrEqualTo(String value) {
+            addCriterion("topic_answer_content >=", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentLessThan(String value) {
+            addCriterion("topic_answer_content <", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentLessThanOrEqualTo(String value) {
+            addCriterion("topic_answer_content <=", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentLike(String value) {
+            addCriterion("topic_answer_content like", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentNotLike(String value) {
+            addCriterion("topic_answer_content not like", value, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentIn(List<String> values) {
+            addCriterion("topic_answer_content in", values, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentNotIn(List<String> values) {
+            addCriterion("topic_answer_content not in", values, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentBetween(String value1, String value2) {
+            addCriterion("topic_answer_content between", value1, value2, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicAnswerContentNotBetween(String value1, String value2) {
+            addCriterion("topic_answer_content not between", value1, value2, "topicAnswerContent");
+            return (Criteria) this;
+        }
+
         public Criteria andTopicAnswerTimeIsNull() {
             addCriterion("topic_answer_time is null");
             return (Criteria) this;

@@ -336,7 +336,7 @@ input:-ms-input-placeholder { color: #fff;}
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-.shot-infomation{
+.short-information{
 	width: 100px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -345,7 +345,7 @@ input:-ms-input-placeholder { color: #fff;}
 	font-size: 14px;
 	color: #888;
 }
-.long-infomation{
+.long-information{
 	width: 100%;
 	clear: both;
 	font-size: 14px;
@@ -391,11 +391,13 @@ input:-ms-input-placeholder { color: #fff;}
 }
 .person-center-wrap{	
 	left: -100%;
+	transition: left .5s;
+	-webkit-transition: left .5s;
 }
 .person-center-wrap.show{
 	z-index: 11;
 	left: 0;
-	transition: left 1s;
+	
 }
 .bar .search-topic{
 	position: relative;
@@ -416,7 +418,7 @@ input:-ms-input-placeholder { color: #fff;}
 	text-indent: 0;
 }
 .check-information .check-topic-tit,
-.attention-topic .check-topic-tit,
+.attention-topic-li .check-topic-tit,
 .check-topic .check-topic-tit{
 	overflow: hidden;
 	background-color: #63c9d7;
@@ -424,7 +426,43 @@ input:-ms-input-placeholder { color: #fff;}
 	border-bottom: 1px solid #63c9d7;
 }
 .check-information .check-topic-tit a,
-.attention-topic .check-topic-tit a,
+.attention-topic-li .check-topic-tit a,
 .check-topic .check-topic-tit a{
 	color: #fff;
 }
+.check-information,
+.attention-topic-li,
+.check-topic{
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	font-family: Microsoft YaHei;
+	position: fixed;
+	top: 0;
+	transition: left .5s;
+	-webkit-transition: left .5s;
+	left: -100%;
+}
+.check-information.show,
+.attention-topic-li.show,
+.check-topic.show{
+	left: 0;
+}
+.answer-input,.info{
+	text-indent: 0;
+}
+body .title{
+	color: #fff;
+	font-size: 18px;
+	font-family: Microsoft YaHei;
+}
+.topic-body .bar .btn .back-home{
+	font-size: 16px;
+}
+.answer-time{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+}
+

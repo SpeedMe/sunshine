@@ -13,7 +13,7 @@
     <header class="bar bar-nav register-header">
         <button class="btn btn-link btn-nav pull-left">
             <span class="icon icon-left-nav"></span>
-            <a href="login.html">登录</a>
+            <a href="javascript:history.back(-1)">返回</a>
         </button>
         <button class="btn btn-link btn-nav pull-right">
             <a href="register.html">注册</a>
@@ -23,14 +23,14 @@
         <div class="logo-head">
            <img src="img/login/P2_LOGO.png" alt="logo"> 
         </div>
-        <form class="login-form">
+        <form class="login-form register-form">
             <div class="input-wrap">
                 <i class="icon icon-user"></i>
                 <input type="text" name="nickname" placeholder="请输入用户名">
             </div>
             <div class="input-wrap">
                 <i class="icon icon-password"></i>
-                <input type="text" name="password" placeholder="请输入密码">
+                <input type="password" name="password" placeholder="请输入密码">
             </div>
             <p class="forget-password"><a href="">忘记密码？</a></p>
             <button class="J-login-btn btn btn-positive btn-block">完成</button>
@@ -38,9 +38,6 @@
         </form>
     </div>
 </body>
-    <script src="ratchet/js/ratchet.js"></script>
-    <script src="ratchet/js/sliders.js"></script>
-    <script src="ratchet/js/push.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/login.js"></script>
 </html>

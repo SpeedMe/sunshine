@@ -2,8 +2,8 @@
 	var answer = {
 		_param:{},
 		_init: function(){
-			this._event();
-			this._pageLoad();
+			answer._event();
+			answer._pageLoad();
 		},
 		_event: function(){
 			//绑定匿名按钮
@@ -26,9 +26,9 @@
 				if(topicAnswerContent!=""){
 					$.post('/shine/sunAnswer/answerTopic',{topicId:loc.topicId,userId:loc.userId,isAnonymity:isAnonymity,topicAnswerContent:topicAnswerContent},function(data){
 						var loc = answer._param;
-						loc.ret = JSON.parse(data);
+						loc.ret = data;
 						if(loc.ret.meta.code === 200){
-							location.href = '/shine/topic-detail.html?channelId='+loc.channelId+'&topicId='+loc.topicId;
+							location.href = document.referrer;
 						}
 					})
 				}else
@@ -37,20 +37,21 @@
 			});
 			//绑定返回
 			$('.trun-back').on('click',function(e){
-				location.href = '/shine/topic-detail.html?channelId='+loc.channelId+'&topicId='+loc.topicId;
+				history.go(-1);
 			});
 		},		
 		_pageLoad : function(){
 			var loc = answer._param;
 			loc.href = location.href;
 			var sp = loc.href.lastIndexOf('userId=');
-			loc.userId = loc.href.substring(sp+1);
+			loc.userId = loc.href.substring(sp+7);
 			var tsp = loc.href.lastIndexOf('topicId='),
 				mid = loc.href.lastIndexOf('&');
-			loc.topicId = loc.href.substring(tsp+1,mid);
+			loc.topicId = loc.href.substring(tsp+8,mid);
 			var tsp = loc.href.lastIndexOf('channelId='),
-				mid = loc.href.lastIndexOf('&');
-			loc.channelId = loc.href.substring(tsp+1,mid);
+				mid = loc.href.lastIndexOf('&topicId');
+			loc.channelId = loc.href.substring(tsp+9,mid);
 		}
 	};
+	$(document).ready(answer._init);
 })();

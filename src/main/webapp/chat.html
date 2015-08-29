@@ -11,10 +11,12 @@
 </head>
 <body class="answer-detail-body">
     <header class="bar bar-nav topic-header">
-        <button class="btn btn-link btn-nav pull-left">
-            <span class="icon icon-left-nav"></span>
-            私聊
-        </button>
+        <a href="javascript:history.back(-1)">
+            <button class="btn btn-link btn-nav pull-left">
+                <span class="icon icon-left-nav"></span>
+                私聊
+            </button>
+        </a>
     </header>
     <nav class="bar bar-tab bottom-btn">
         <a class="send-item tab-item" href="#">
@@ -27,18 +29,12 @@
                 发送给：罗梦情
             </div>
             <div class="send-content">
-                <label class="send-content-tit">
-                    内容：
-                </label>
-                <textarea class="enter-input" rows="14" placeholder="输入发送信息..."></textarea> 
+                <textarea class="enter-input info" rows="14" placeholder="输入发送信息..."></textarea>
                 
             </div>
         </form>
     </div>
 </body>
-    <script src="ratchet/js/ratchet.js"></script>
-    <script src="ratchet/js/push.js"></script>
-    <script src="ratchet/js/sliders.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/chat.js"></script>
 </html>

@@ -36,14 +36,14 @@
     <!--<url-pattern>/*</url-pattern>-->
     <!--</filter-mapping>-->
 
-    <filter>
-        <filter-name>sessionFilter</filter-name>
-        <filter-class>com.zhubajie.sunshine.web.filter.SessionFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>sessionFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!--<filter>-->
+        <!--<filter-name>sessionFilter</filter-name>-->
+        <!--<filter-class>com.zhubajie.sunshine.web.filter.SessionFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>sessionFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
     <!-- Spring MVC 核心控制器 DispatcherServlet 配置 -->
     <servlet>

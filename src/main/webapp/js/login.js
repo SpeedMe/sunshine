@@ -15,8 +15,7 @@
             dataType: 'json',
             success: function (json) {
                 if (json.meta.code == 200) {
-                    alert("登录成功");
-                    window.location.href = "index.html";
+                   location.href = document.referrer;
                 } else {
                     alert(json.meta.message);
                 }

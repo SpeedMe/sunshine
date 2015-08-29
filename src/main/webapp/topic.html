@@ -13,17 +13,21 @@
     <header class="bar bar-nav topic-header slide">
         <button class="btn btn-link btn-nav pull-left center-btn">
             <span class="icon icon-bars"></span>
-            宝贝回家
+
         </button>
-        <button class="btn btn-link btn-nav pull-right">
-            <span class="icon icon-search search-topic"></span>
-        </button>
+        <a href="index.html">
+            <button class="btn btn-link btn-nav pull-right">
+                首页
+                <span class="icon icon-right-nav  back-home"></span>
+            </button>
+        </a>
+        <h1 class="title">宝贝回家</h1>
     </header>
     <nav class="bar bar-tab bottom-btn no-login">
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="register.html">
             注册
         </a>
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="login.html">
             <span></span>
             登录
         </a>
@@ -34,60 +38,6 @@
         </a>
     </nav>
     <div class="content">
-        <div class="topic-info">
-            <p class="writer-info">
-                来自甜洁
-                <img src="http://placehold.it/25x25" alt="">
-                <span class="temperature-small fr">100&#176;</span>
-            </p>
-            <p class="content-detail">
-                1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。
-            </p>
-            <div class="hot-answer">
-                <div class="fl answer-user">
-                    <p class="temperature-small">10&#176;</p>
-                </div>
-                <div class="topic-answer">
-                    <p>在杭州好像有和你说的情况差不多的孩子叫国田一，你们快过来，我再去了解一下，等一会给你们私信...</p>
-                </div>
-            </div>
-        </div>
-        <div class="topic-info">
-            <p class="writer-info">
-                来自甜洁
-                <img src="http://placehold.it/25x25" alt="">
-                <span class="temperature-small fr">100&#176;</span>
-            </p>
-            <p class="content-detail">
-                1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。
-            </p>
-            <div class="hot-answer">
-                <div class="fl answer-user">
-                    <p class="temperature-small">10&#176;</p>
-                </div>
-                <div class="topic-answer">
-                    <p>在杭州好像有和你说的情况差不多的孩子叫国田一，你们快过来，我再去了解一下，等一会给你们私信...</p>
-                </div>
-            </div>
-        </div>
-        <div class="topic-info">
-            <p class="writer-info">
-                来自甜洁
-                <img src="http://placehold.it/25x25" alt="">
-                <span class="temperature-small fr">100&#176;</span>
-            </p>
-            <p class="content-detail">
-                1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。
-            </p>
-            <div class="hot-answer">
-                <div class="fl answer-user">
-                    <p class="temperature-small">10&#176;</p>
-                </div>
-                <div class="topic-answer">
-                    <p>在杭州好像有和你说的情况差不多的孩子叫国田一，你们快过来，我再去了解一下，等一会给你们私信...</p>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="person-center-wrap slide" id="mySlider">
         <div class="person-center">
@@ -98,7 +48,7 @@
             </div>
             <ul class="table-view">
                 <li class="table-view-cell media">
-                    <a href="#check-topic">
+                    <a class="go-check-topic">
                         <span class="media-object pull-left icon icon-release"></span>
                         <div class="media-body">
                             发布
@@ -106,7 +56,7 @@
                     </a>
                 </li>
                 <li class="table-view-cell media">
-                    <a href="#attention-topic">
+                    <a class="go-attention-topic">
                         <span class="media-object pull-left icon icon-attention"></span>
                         <div class="media-body">
                             关注
@@ -114,17 +64,18 @@
                     </a>
                 </li>
                 <li class="table-view-cell media">
-                    <a href="#check-information">
+                    <a class="go-check-information">
                         <span class="media-object pull-left icon icon-information"></span>
                         <div class="media-body">
                             信息
                         </div>
                     </a>
                 </li>
-            </ul>
-            <ul class="table-view check-information modal" id="check-information">
+            </ul>  
+        </div>
+        <ul class="table-view check-information" id="check-information">
                 <li class="check-topic-tit">
-                    <a href="#check-information">
+                    <a class="back-check-information">
                         <span class="icon icon-left-nav"></span>
                         我的消息
                     </a>
@@ -135,7 +86,7 @@
                             <i class="icon-radio"></i>
                             Sunshine&#176;
                         </div>
-                        <div class="shot-infomation">
+                        <div class="short-information">
                             感谢您成为SunShine&#176;使用者。
                             感谢您成为SunShine&#176;使用者。
                         </div>
@@ -143,63 +94,32 @@
                 </li>
                 <li class="table-view-cell media">
                     <a>
-                        <div class="send-name">
+                        <div class="send-name color-blue">
                             <i class="icon-radio"></i>
                             Sunshine&#176;
                         </div>
-                        <div class="long-infomation">
-                            感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。
+                        <div class="short-information">
+                            感谢您成为SunShine&#176;使用者。
+                            感谢您成为SunShine&#176;使用者。
                         </div>
                     </a>
                 </li>
                 <li class="table-view-cell media">
                     <a>
-                        <div class="send-name">
+                        <div class="send-name color-blue">
                             <i class="icon-radio"></i>
                             Sunshine&#176;
                         </div>
-                        <div class="long-infomation">
-                            感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。
-                        </div>
-                    </a>
-                </li>
-                <li class="table-view-cell media">
-                    <a>
-                        <div class="send-name">
-                            <i class="icon-radio"></i>
-                            Sunshine&#176;
-                        </div>
-                        <div class="long-infomation">
-                            感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。
-                        </div>
-                    </a>
-                </li>
-                <li class="table-view-cell media">
-                    <a>
-                        <div class="send-name">
-                            <i class="icon-radio"></i>
-                            Sunshine&#176;
-                        </div>
-                        <div class="long-infomation">
-                            感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。
-                        </div>
-                    </a>
-                </li>
-                <li class="table-view-cell media">
-                    <a>
-                        <div class="send-name">
-                            <i class="icon-radio"></i>
-                            Sunshine&#176;
-                        </div>
-                        <div class="long-infomation">
-                            感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。感谢您成为SunShine&#176;使用者。
+                        <div class="short-information">
+                            感谢您成为SunShine&#176;使用者。
+                            感谢您成为SunShine&#176;使用者。
                         </div>
                     </a>
                 </li>
             </ul>
-            <ul class="table-view attention-topic check-topic modal" id="attention-topic">
+            <ul class="table-view attention-topic-li check-topic" id="attention-topic">
                 <li class="check-topic-tit">
-                    <a href="#attention-topic">
+                    <a class="back-attention-topic">
                         <span class="icon icon-left-nav"></span>
                         关注的话题
                     </a>
@@ -216,9 +136,9 @@
                     </a>
                 </li>
             </ul>
-            <ul class="table-view check-topic modal" id="check-topic">
+            <ul class="table-view check-topic" id="check-topic">
                 <li class="check-topic-tit">
-                    <a href="#check-topic">
+                    <a class="back-check-topic">
                         <span class="icon icon-left-nav"></span>
                         发布的话题
                     </a>
@@ -246,22 +166,11 @@
                     </a>
                 </li>
             </ul>
-        </div>
     </div>
 </body>
-<script src="ratchet/js/ratchet.js"></script>
-<script src="ratchet/js/push.js"></script>
-<script src="ratchet/js/sliders.js"></script>
 <script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/index.js"></script>
 <script src="js/jgestures.min.js"></script>
-<script type="text/javascript">
-    $(".center-btn").on("click",function(){
-        $("#mySlider").addClass("show");
-        $('#mySlider').on('swipeleft',function(){
-            alert(1);
-            $("#mySlider").removeClass("show");
-        });
-    });
-</script>
+<script src="js/topic.js"></script>
+
+
 </html>

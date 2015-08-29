@@ -17,21 +17,15 @@ public interface SunTopicAnswerMapper {
 
     int insertSelective(SunTopicAnswer record);
 
-    List<SunTopicAnswer> selectByExampleWithBLOBs(SunTopicAnswerExample example);
-
     List<SunTopicAnswer> selectByExample(SunTopicAnswerExample example);
 
     SunTopicAnswer selectByPrimaryKey(Integer topicAnswerId);
 
     int updateByExampleSelective(@Param("record") SunTopicAnswer record, @Param("example") SunTopicAnswerExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") SunTopicAnswer record, @Param("example") SunTopicAnswerExample example);
-
     int updateByExample(@Param("record") SunTopicAnswer record, @Param("example") SunTopicAnswerExample example);
 
     int updateByPrimaryKeySelective(SunTopicAnswer record);
-
-    int updateByPrimaryKeyWithBLOBs(SunTopicAnswer record);
 
     int updateByPrimaryKey(SunTopicAnswer record);
 }

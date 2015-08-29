@@ -72,7 +72,7 @@ public class AnswerServiceImpl implements AnswerService {
         sunAnswerThankMapper.insertSelective(sunAnswerThank);
 
         //增加回答温度
-        SunTopicAnswer sunTopicAnswer = increaseAnswerTemp(sunAnswerThank.getAnswerThankId(), TemperatureConstant.ANSWER_THANK_TEMP);
+        SunTopicAnswer sunTopicAnswer = increaseAnswerTemp(sunAnswerThank.getTopicAnswerId(), TemperatureConstant.ANSWER_THANK_TEMP);
 
         //增加话题温度
         SunChannelTopic sunChannelTopic = increaseTopicTemp(sunTopicAnswer.getTopicId(), TemperatureConstant.ANSWER_THANK_TEMP);

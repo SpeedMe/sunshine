@@ -11,11 +11,11 @@ public class SunTopicAnswer {
 
     private Integer topicAnswerTemp;
 
+    private String topicAnswerContent;
+
     private Date topicAnswerTime;
 
     private Boolean isAnonymity;
-
-    private String topicAnswerContent;
 
     public Integer getTopicAnswerId() {
         return topicAnswerId;
@@ -49,6 +49,14 @@ public class SunTopicAnswer {
         this.topicAnswerTemp = topicAnswerTemp;
     }
 
+    public String getTopicAnswerContent() {
+        return topicAnswerContent;
+    }
+
+    public void setTopicAnswerContent(String topicAnswerContent) {
+        this.topicAnswerContent = topicAnswerContent == null ? null : topicAnswerContent.trim();
+    }
+
     public Date getTopicAnswerTime() {
         return topicAnswerTime;
     }
@@ -63,13 +71,5 @@ public class SunTopicAnswer {
 
     public void setIsAnonymity(Boolean isAnonymity) {
         this.isAnonymity = isAnonymity;
-    }
-
-    public String getTopicAnswerContent() {
-        return topicAnswerContent;
-    }
-
-    public void setTopicAnswerContent(String topicAnswerContent) {
-        this.topicAnswerContent = topicAnswerContent == null ? null : topicAnswerContent.trim();
     }
 }

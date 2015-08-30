@@ -15,7 +15,7 @@
                     data: data,
                     dataType: 'json',
                     success: function(json){
-                        if (json.meta.code == 200) {
+                        if (json .meta.code == 200) {
                         	alert("注册成功");
                         	window.location.href="index.html";
                         }else{

@@ -44,4 +44,12 @@ public class FeResponse<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "FeResponse{" +
+                "meta=" + meta +
+                ", data=" + data +
+                '}';
+    }
 }

@@ -51,4 +51,12 @@ public interface AnswerService {
     Integer countTopicAnswer(Integer topicId) throws Exception;
 
     List<SunTopicAnswer> queryAnswersByTopicIdOrderByTemp(Integer topicId) throws Exception;
+
+    /**
+     * 得到话题温度最高的回答
+     * @param topicId
+     * @return
+     * @throws Exception
+     */
+    SunTopicAnswer getMaxTempAnswer(Integer topicId) throws Exception;
 }

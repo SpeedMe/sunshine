@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -143,6 +144,14 @@ public class SunUserController {
         }
 
         return response;
+    }
+
+    @RequestMapping(value = "/test")
+    public String test(Model model){
+        String str = "hello world !";
+        model.addAttribute("str", str);
+
+        return "topic";
     }
 
 }

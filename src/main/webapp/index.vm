@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>推荐频道</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="ratchet/css/ratchet.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+<div class="welcome content" id="swipe">
+    <img src="img/welcome.png" alt="">
+</div>
+</body>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jgestures.min.js"></script>
+<script>
+
+    $('#swipe').bind('swipeone swipeleft', function () {
+        $('#swipe').addClass("hide");
+
+        window.location.href='/shine/sunChannel/getAllChannelsOrderByTemp';
+    });
+</script>
+</html>

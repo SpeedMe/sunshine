@@ -82,4 +82,18 @@ public class SunChannelTopic {
     public void setIsAnonymity(Boolean isAnonymity) {
         this.isAnonymity = isAnonymity;
     }
+
+    @Override
+    public String toString() {
+        return "SunChannelTopic{" +
+                "topicId=" + topicId +
+                ", channelId=" + channelId +
+                ", userId=" + userId +
+                ", topicTemp=" + topicTemp +
+                ", topicName='" + topicName + '\'' +
+                ", topicContent='" + topicContent + '\'' +
+                ", topicCreateTime=" + topicCreateTime +
+                ", isAnonymity=" + isAnonymity +
+                '}';
+    }
 }

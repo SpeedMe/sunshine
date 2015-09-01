@@ -2,16 +2,21 @@ package com.zhubajie.sunshine.web.controller;
 
 import com.zhubajie.sunshine.core.entity.FeResponse;
 import com.zhubajie.sunshine.web.model.SunChannelTopic;
+import com.zhubajie.sunshine.web.model.SunTopicAnswer;
 import com.zhubajie.sunshine.web.model.SunTopicAttention;
+import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
 import com.zhubajie.sunshine.web.service.topicservice.TopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 话题Controller
@@ -25,6 +30,9 @@ public class SunTopicController {
     @Resource(name = "topicService")
     private TopicService topicService;
 
+    @Resource(name = "answerService")
+    private AnswerService answerService;
+
     /**
      * 根据频道id获取到所有话题，按照温度排序
      *
@@ -33,19 +41,28 @@ public class SunTopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/getTopicsByChannelIdOrderByTemp/{channelId}", method = RequestMethod.GET)
-    public FeResponse<List> getTopicsByChannelIdOrderByTemp(@PathVariable String channelId) {
-        FeResponse<List> response;
+    public ModelAndView getTopicsByChannelIdOrderByTemp(@PathVariable String channelId) {
+        ModelAndView modelAndView = new ModelAndView("topic");
+        FeResponse<Map<SunChannelTopic,SunTopicAnswer>> response;
 
         try {
             List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(Integer.parseInt(channelId));
 
-            response = new FeResponse<List>(HttpStatus.OK.value(), "查询成功", sunChannelTopics);
+            //话题和其最高温度的答案
+            Map<SunChannelTopic,SunTopicAnswer> topicAndAnswerMap = new HashMap<SunChannelTopic, SunTopicAnswer>();
+
+            for (SunChannelTopic sunChannelTopic : sunChannelTopics){
+                topicAndAnswerMap.put(sunChannelTopic,answerService.getMaxTempAnswer(sunChannelTopic.getTopicId()));
+            }
+
+            response = new FeResponse<Map<SunChannelTopic,SunTopicAnswer>>(HttpStatus.OK.value(), "查询成功", topicAndAnswerMap);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            response = new FeResponse<List>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+            response = new FeResponse<Map<SunChannelTopic,SunTopicAnswer>>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
 
-        return response;
+        modelAndView.addObject("topicResponse",response);
+        return modelAndView;
     }
 
 

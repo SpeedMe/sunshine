@@ -128,6 +128,21 @@ public class AnswerServiceImpl implements AnswerService {
         return sunTopicAnswerMapper.selectByExample(sunTopicAnswerExample);
     }
 
+    /**
+     * 得到话题温度最高的回复
+     * @param topicId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public SunTopicAnswer getMaxTempAnswer(Integer topicId) throws Exception {
+        SunTopicAnswerExample sunTopicAnswerExample = new SunTopicAnswerExample();
+        sunTopicAnswerExample.setOrderByClause(DatabaseParamConstant.ANSWER_TEMP_Max);
+        sunTopicAnswerExample.createCriteria().andTopicIdEqualTo(topicId);
+        List<SunTopicAnswer> sunTopicAnswers = sunTopicAnswerMapper.selectByExample(sunTopicAnswerExample);
+        return sunTopicAnswers.size() == 0 ? null : sunTopicAnswers.get(0);
+    }
+
 
     /**
      * 增加频道温度

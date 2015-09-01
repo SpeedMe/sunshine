@@ -90,4 +90,12 @@ public interface TopicService {
      */
     List<SunChannelTopic> queryFollowTopicByUserId(Integer userId) throws Exception;
 
+    /**
+     * 得到频道下面温度最高的话题
+     * @param channelId
+     * @return
+     * @throws Exception
+     */
+    SunChannelTopic getMaxTempTopic(Integer channelId)throws Exception;
+
 }

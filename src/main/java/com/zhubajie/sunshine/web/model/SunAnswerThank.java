@@ -42,4 +42,14 @@ public class SunAnswerThank {
     public void setThankTime(Date thankTime) {
         this.thankTime = thankTime;
     }
+
+    @Override
+    public String toString() {
+        return "SunAnswerThank{" +
+                "answerThankId=" + answerThankId +
+                ", userId=" + userId +
+                ", topicAnswerId=" + topicAnswerId +
+                ", thankTime=" + thankTime +
+                '}';
+    }
 }

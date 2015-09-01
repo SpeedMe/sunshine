@@ -197,6 +197,21 @@ public class TopicServiceImpl implements TopicService {
         return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
     }
 
+    /**
+     * 得到最大温度的话题
+     * @param channelId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public SunChannelTopic getMaxTempTopic(Integer channelId) throws Exception {
+        SunChannelTopicExample sunChannelTopicExample = new SunChannelTopicExample();
+        sunChannelTopicExample.createCriteria().andChannelIdEqualTo(channelId);
+        sunChannelTopicExample.setOrderByClause(DatabaseParamConstant.TOPIC_TEMP_Max);
+        List<SunChannelTopic> sunChannelTopics = sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
+        return sunChannelTopics.size() == 0 ? null : sunChannelTopics.get(0);
+    }
+
 
     /**
      * 增加频道温度

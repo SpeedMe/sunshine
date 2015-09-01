@@ -14,4 +14,13 @@ public class DatabaseParamConstant {
 
     //回复温度
     public final static String ANSWER_TEMP = "topic_answer_temp desc";
+
+    //最高频道温度
+    public final static String CHANNEL_TEMP_Max = "channel_temp desc limit 1";
+
+    //最高话题温度
+    public final static String TOPIC_TEMP_Max = "topic_temp desc limit 1";
+
+    //最高回复温度
+    public final static String ANSWER_TEMP_Max = "topic_answer_temp desc limit 1";
 }

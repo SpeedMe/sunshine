@@ -72,4 +72,17 @@ public class SunTopicAnswer {
     public void setIsAnonymity(Boolean isAnonymity) {
         this.isAnonymity = isAnonymity;
     }
+
+    @Override
+    public String toString() {
+        return "SunTopicAnswer{" +
+                "topicAnswerId=" + topicAnswerId +
+                ", topicId=" + topicId +
+                ", userId=" + userId +
+                ", topicAnswerTemp=" + topicAnswerTemp +
+                ", topicAnswerContent='" + topicAnswerContent + '\'' +
+                ", topicAnswerTime=" + topicAnswerTime +
+                ", isAnonymity=" + isAnonymity +
+                '}';
+    }
 }

@@ -33,4 +33,9 @@ public class ChannelServiceImpl implements ChannelService {
 
         return sunShineChannelMapper.selectByExample(sunShineChannelExample);
     }
+
+    @Override
+    public SunShineChannel getChannelById(Integer channelId) throws Exception {
+        return sunShineChannelMapper.selectByPrimaryKey(channelId);
+    }
 }

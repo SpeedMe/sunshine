@@ -15,4 +15,12 @@ public interface ChannelService {
      * @throws Exception
      */
     List<SunShineChannel> getAllChannelsOrderByTemp() throws Exception;
+
+    /**
+     * 根据channelId获取到频道信息
+     * @param channelId
+     * @return
+     * @throws Exception
+     */
+    SunShineChannel getChannelById(Integer channelId) throws Exception;
 }

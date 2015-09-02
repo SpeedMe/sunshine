@@ -22,7 +22,7 @@
         </button>
     </a>
 
-    <h1 class="title">宝贝回家</h1>
+    <h1 class="title">$channel.channelName</h1>
 </header>
 <nav class="bar bar-tab bottom-btn no-login">
     <a class="tab-item" href="register.html">
@@ -39,33 +39,38 @@
     </a>
 </nav>
 <div class="content short-topic-info">
-    #set($topicAndAnswers = $topicResponse.data)
-    #foreach($topicAndAnswer in $topicAndAnswers.entrySet())
+    #foreach($topicVo in $topicResponse.data)
         <div class="topic-info" data-topic="'+locdata[idx].topicId+'">
             <p class="writer-info">
-                <span class="writer-name">来自匿名</span>
+                <span class="writer-name">
+                #if($topicVo.isAnonymityTopic)
+                    来自匿名
+                #else
+                    $topicVo.nicknameTopic
+                #end
+        </span>
                 <img src="/img/person.png" alt="">
-                <span class="temperature-small fr">$topicAndAnswer.key.topicTemp° </span>
+                <span class="temperature-small fr">$topicVo.topicTemp° </span>
             </p>
 
             <p class="content-detail">
-                $topicAndAnswer.key.topicContent
+                $topicVo.topicContent
             </p>
 
-            #if($topicAndAnswer.value)
+            #if($topicVo.topicAnswerId)
                 <div class="hot-answer">
                     <div class="fl answer-user">
-                        <p class="temperature-small">$topicAndAnswer.value.topicAnswerTemp° </p>
+                        <p class="temperature-small">$topicVo.topicAnswerTemp° </p>
                     </div>
                     <div class="topic-answer">
-                        <p>$topicAndAnswer.value.topicAnswerContent</p>
+                        <p>$topicVo.topicAnswerContent</p>
                     </div>
                 </div>
             #end
         </div>
     #end
-
 </div>
+
 <div class="person-center-wrap slide" id="mySlider">
     <div class="person-center">
         <div class="person-info">

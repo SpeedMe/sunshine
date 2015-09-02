@@ -16,17 +16,16 @@
 <div class="content">
 
     <ul class="table-view">
-        #set($channelAndTopicMap = $response.data)
-        #foreach($channelAndTopic in $channelAndTopicMap.entrySet())
+        #foreach($channelVo in $response.data)
             <li class="table-view-cell">
-                <a  class="channel-link" href="/shine/sunTopic/getTopicsByChannelIdOrderByTemp/$channelAndTopic.key.channelId" target="_self">
+                <a  class="channel-link" href="/shine/sunTopic/getTopicsByChannelIdOrderByTemp/$channelVo.channelId" target="_self">
                     <div class="content-header">
-                        <span class="temperature">$channelAndTopic.key.channelTemp</span>
-                        <h3 class="content-tit">$channelAndTopic.key.channelName</h3>
+                        <span class="temperature">$channelVo.channelTemp</span>
+                        <h3 class="content-tit">$channelVo.channelName</h3>
                     </div>
                     <div class="content-body">
-                        <span class="temperature-small">$channelAndTopic.value.topicTemp </span>
-                        <p class="content-inner" >$channelAndTopic.value.topicContent</p>
+                        <span class="temperature-small">$channelVo.topicTemp </span>
+                        <p class="content-inner" >$channelVo.topicContent</p>
                     </div>
                 </a>
             </li>

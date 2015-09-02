@@ -1,11 +1,13 @@
 package com.zhubajie.sunshine.web.controller;
 
+import com.zhubajie.sunshine.core.convertor.Convertor;
 import com.zhubajie.sunshine.core.entity.FeResponse;
-import com.zhubajie.sunshine.web.model.SunChannelTopic;
-import com.zhubajie.sunshine.web.model.SunTopicAnswer;
-import com.zhubajie.sunshine.web.model.SunTopicAttention;
+import com.zhubajie.sunshine.web.model.*;
 import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
+import com.zhubajie.sunshine.web.service.channelservice.ChannelService;
 import com.zhubajie.sunshine.web.service.topicservice.TopicService;
+import com.zhubajie.sunshine.web.service.userservice.UserService;
+import com.zhubajie.sunshine.web.vo.TopicVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +30,17 @@ import java.util.Map;
 public class SunTopicController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Resource(name = "topicService")
+    @Resource(name = "topicService")    //话题
     private TopicService topicService;
 
-    @Resource(name = "answerService")
+    @Resource(name = "answerService")   //回复
     private AnswerService answerService;
+
+    @Resource(name = "channelService")  //频道
+    private ChannelService channelService;
+
+    @Resource(name = "userService")     //用户
+    private UserService userService;
 
     /**
      * 根据频道id获取到所有话题，按照温度排序
@@ -43,25 +52,36 @@ public class SunTopicController {
     @RequestMapping(value = "/getTopicsByChannelIdOrderByTemp/{channelId}", method = RequestMethod.GET)
     public ModelAndView getTopicsByChannelIdOrderByTemp(@PathVariable String channelId) {
         ModelAndView modelAndView = new ModelAndView("topic");
-        FeResponse<Map<SunChannelTopic,SunTopicAnswer>> response;
-
+        FeResponse<List<TopicVo>> response;
+        SunShineChannel sunShineChannel = null;
         try {
             List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByChannelIdOrderByTemp(Integer.parseInt(channelId));
 
-            //话题和其最高温度的答案
-            Map<SunChannelTopic,SunTopicAnswer> topicAndAnswerMap = new HashMap<SunChannelTopic, SunTopicAnswer>();
+            List<TopicVo> topicVos = new LinkedList<TopicVo>();
 
-            for (SunChannelTopic sunChannelTopic : sunChannelTopics){
-                topicAndAnswerMap.put(sunChannelTopic,answerService.getMaxTempAnswer(sunChannelTopic.getTopicId()));
+            sunShineChannel = channelService.getChannelById(Integer.parseInt(channelId));
+            for (SunChannelTopic sunChannelTopic : sunChannelTopics) {
+                SunShineUser userTopic = userService.getUserById(sunChannelTopic.getUserId());
+                SunTopicAnswer sunTopicAnswer = answerService.getMaxTempAnswer(sunChannelTopic.getTopicId());
+
+                SunShineUser userAnswer = null;
+
+                if (sunTopicAnswer != null) {
+                    userAnswer = userService.getUserById(sunTopicAnswer.getUserId());
+                }
+
+                topicVos.add(Convertor.convertToTopicVo(sunShineChannel, sunChannelTopic, userTopic, sunTopicAnswer, userAnswer));
+
             }
 
-            response = new FeResponse<Map<SunChannelTopic,SunTopicAnswer>>(HttpStatus.OK.value(), "查询成功", topicAndAnswerMap);
+            response = new FeResponse<List<TopicVo>>(HttpStatus.OK.value(), "查询成功", topicVos);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            response = new FeResponse<Map<SunChannelTopic,SunTopicAnswer>>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+            response = new FeResponse<List<TopicVo>>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
 
-        modelAndView.addObject("topicResponse",response);
+        modelAndView.addObject("channel",sunShineChannel);
+        modelAndView.addObject("topicResponse", response);
         return modelAndView;
     }
 

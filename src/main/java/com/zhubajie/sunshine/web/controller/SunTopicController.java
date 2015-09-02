@@ -7,7 +7,6 @@ import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
 import com.zhubajie.sunshine.web.service.channelservice.ChannelService;
 import com.zhubajie.sunshine.web.service.topicservice.TopicService;
 import com.zhubajie.sunshine.web.service.userservice.UserService;
-import com.zhubajie.sunshine.web.vo.TopicVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,10 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 话题Controller

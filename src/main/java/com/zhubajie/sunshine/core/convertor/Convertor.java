@@ -7,8 +7,6 @@ import com.zhubajie.sunshine.web.model.SunTopicAnswer;
 import com.zhubajie.sunshine.web.vo.ChannelVo;
 import com.zhubajie.sunshine.web.vo.TopicVo;
 
-import java.util.Date;
-
 /**
  * @description: 频道实体转换工具类
  * @author: HuangLei

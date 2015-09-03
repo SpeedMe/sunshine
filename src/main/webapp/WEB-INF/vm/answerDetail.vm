@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>回复详情</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="ratchet/css/ratchet.css" rel="stylesheet">
+    <link href="css/topic.css" rel="stylesheet">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/answer-detail.js"></script>
+</head>
+<body class="answer-detail-body">
+    <header class="bar bar-nav topic-header">
+        <button class="btn btn-link btn-nav pull-left turn-back">
+            <span class="icon icon-left-nav"></span>
+            <span class="answer-time">1997年04月08日</span>
+        </button>
+        <button class="btn btn-link btn-nav pull-right">
+            <span class="icon icon-share-btn"></span>
+        </button>
+    </header>
+    <nav class="bar bar-tab bottom-btn">
+        <a class="tab-item thanks" href="javascript:void(0)">
+            感谢
+        </a>
+        <a class="tab-item chat" href="javascript:void(0)">
+            <span></span>
+            私聊
+        </a>
+    </nav>
+    <div class="content">
+        <div class="topic-info">
+            <p class="writer-info">
+                <img class="writer-img" src="http://placehold.it/25x25" alt="">
+                <span class="writer-name">甜洁</span>
+                <span class="temperature-small fr">100° </span>
+            </p>
+            <p class="answer-detail">
+                1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。
+            </p>
+        </div>
+    </div>
+</body>
+</html>

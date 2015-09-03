@@ -40,7 +40,7 @@
 </nav>
 <div class="content short-topic-info">
     #foreach($topicVo in $topicResponse.data)
-        <div class="topic-info" data-topic="'+locdata[idx].topicId+'">
+        <div class="topic-info" data-topic="$topicVo.topicId">
             <p class="writer-info">
                 <span class="writer-name">
                 #if($topicVo.isAnonymityTopic)

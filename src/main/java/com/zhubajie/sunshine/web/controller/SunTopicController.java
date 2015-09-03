@@ -7,6 +7,9 @@ import com.zhubajie.sunshine.web.service.answerservice.AnswerService;
 import com.zhubajie.sunshine.web.service.channelservice.ChannelService;
 import com.zhubajie.sunshine.web.service.topicservice.TopicService;
 import com.zhubajie.sunshine.web.service.userservice.UserService;
+import com.zhubajie.sunshine.web.vo.AnswerVo;
+import com.zhubajie.sunshine.web.vo.TopicDetailVo;
+import com.zhubajie.sunshine.web.vo.TopicVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -214,18 +217,34 @@ public class SunTopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/getTopicByTopicId/{topicId}", method = RequestMethod.GET)
-    public FeResponse<SunChannelTopic> getTopicByTopicId(@PathVariable String topicId) {
-        FeResponse<SunChannelTopic> response;
+    public ModelAndView getTopicByTopicId(@PathVariable String topicId) {
+        ModelAndView modelAndView = new ModelAndView("topic-detail");
+
+        FeResponse<TopicDetailVo> response;
 
         try {
-            SunChannelTopic sunChannelTopic = topicService.getTopicByTopicId(Integer.parseInt(topicId));
-            response = new FeResponse<SunChannelTopic>(HttpStatus.OK.value(), "查找成功", sunChannelTopic);
+            SunChannelTopic topic = topicService.getTopicByTopicId(Integer.parseInt(topicId));
+
+            SunShineChannel channel = channelService.getChannelById(topic.getChannelId());
+
+            List<SunTopicAnswer> answers = answerService.queryAnswersByTopicIdOrderByTemp(topic.getTopicId());
+
+            SunShineUser userTopic = userService.getUserById(topic.getUserId());
+
+            //答案显示实体类
+            List<AnswerVo> answerVos = new LinkedList<AnswerVo>();
+            for (SunTopicAnswer answer : answers){
+                answerVos.add(Convertor.convertToAnswerVo(answer,userService.getUserById(answer.getUserId())));
+            }
+
+            response = new FeResponse<TopicDetailVo>(HttpStatus.OK.value(), "查找成功", Convertor.convertToTopicDetailVo(channel, topic, userTopic, answerVos));
         } catch (Exception e) {
             logger.error(e.getMessage());
-            response = new FeResponse<SunChannelTopic>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+            response = new FeResponse<TopicDetailVo>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
 
-        return response;
+        modelAndView.addObject("topicResponse", response);
+        return modelAndView;
     }
 
 }

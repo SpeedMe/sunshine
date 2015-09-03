@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>话题详情</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="../../ratchet/css/ratchet.css" rel="stylesheet">
+    <link href="../../css/topic.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/topic-detail.js"></script>
+</head>
+<body>
+<header class="bar bar-nav topic-header">
+    <button class="btn btn-link btn-nav pull-left turn-back">
+        <span class="icon icon-left-nav"></span>
+        返回
+    </button>
+    <button class="btn btn-link btn-nav pull-right">
+        <span class="icon icon-share-btn"></span>
+    </button>
+</header>
+<div class="content">
+    #set($topicDetail = $topicResponse.data)
+    <p class="writer-info" data-topic-id = "$topicDetail.topicId" data-user-id = "$topicDetail.userIdTopic" data-channle-id = "$topicDetail.channelId">
+        <span class="writer-name">
+            来自
+            #if($topicDetail.isAnonymityTopic)
+               匿名
+            #else
+                $topicDetail.nicknameTopic
+            #end
+        </span>
+        <img src="/img/person.png" height="25" alt="">
+        <span class="temperature-small fr">$topicDetail.topicTemp° </span>
+    </p>
+
+    <p class="content-detail">
+        $topicDetail.topicContent
+    </p>
+
+    <p>
+        <button class="btn btn-link pull-left topic-btn active follow follow-btn">
+            关注
+            <span></span>
+        </button>
+        <button class="btn btn-link pull-right topic-btn answer-btn">
+            回答
+        </button>
+    </p>
+    <ul class="answer">
+        #foreach($topicAnswer in $topicDetail.answerVos)
+            <li data-answerId="$topicAnswer.topicAnswerId">
+                <div class="fl answer-user">
+                    <p><img class="user-image" src="http://placehold.it/25x25" alt=""></p>
+
+                    <p class="temperature-small">$topicAnswer.topicAnswerTemp</p>
+                </div>
+                <div class="topic-answer">
+                    <p class="answer-name">
+                        #if($topicAnswer.isAnonymityAnswer)
+                            匿名
+                        #else
+                            $topicAnswer.nicknameAnswer
+                        #end
+                    </p>
+
+                    <p class="answer-container">$topicAnswer.topicAnswerContent</p>
+                </div>
+            </li>
+        #end
+    </ul>
+</div>
+</body>
+</html>

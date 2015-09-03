@@ -4,8 +4,13 @@ import com.zhubajie.sunshine.web.model.SunChannelTopic;
 import com.zhubajie.sunshine.web.model.SunShineChannel;
 import com.zhubajie.sunshine.web.model.SunShineUser;
 import com.zhubajie.sunshine.web.model.SunTopicAnswer;
+import com.zhubajie.sunshine.web.vo.AnswerVo;
 import com.zhubajie.sunshine.web.vo.ChannelVo;
+import com.zhubajie.sunshine.web.vo.TopicDetailVo;
 import com.zhubajie.sunshine.web.vo.TopicVo;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @description: 频道实体转换工具类
@@ -89,5 +94,55 @@ public class Convertor {
         }
 
         return topicVo;
+    }
+
+    /**
+     * 转换为前端单个话题详情页面
+     * @param channel
+     * @param topic
+     * @param answerVos
+     * @return
+     */
+    public static TopicDetailVo convertToTopicDetailVo(SunShineChannel channel, SunChannelTopic topic, SunShineUser userTopic, List<AnswerVo> answerVos){
+        TopicDetailVo topicDetailVo = new TopicDetailVo();
+
+        topicDetailVo.setChannelId(channel.getChannelId());
+        topicDetailVo.setChannelName(channel.getChannelName());
+        topicDetailVo.setChannelTemp(channel.getChannelTemp());
+
+        topicDetailVo.setTopicId(topic.getTopicId());
+        topicDetailVo.setTopicTemp(topic.getTopicTemp());
+        topicDetailVo.setTopicName(topic.getTopicName());
+        topicDetailVo.setTopicContent(topic.getTopicContent());
+        topicDetailVo.setTopicCreateTime(topic.getTopicCreateTime());
+        topicDetailVo.setIsAnonymityTopic(topic.getIsAnonymity());
+
+        topicDetailVo.setUserIdTopic(userTopic.getUserId());
+        topicDetailVo.setNicknameTopic(userTopic.getNickname());
+        topicDetailVo.setAvatarPathTopic(userTopic.getAvatarPath());
+
+        topicDetailVo.setAnswerVos(answerVos);
+        return topicDetailVo;
+    }
+
+    /**
+     * 转换为前端显示的回复实体
+     * @param answer
+     * @param userAnswer
+     * @return
+     */
+    public static AnswerVo convertToAnswerVo(SunTopicAnswer answer, SunShineUser userAnswer){
+        AnswerVo answerVo = new AnswerVo();
+
+        answerVo.setTopicAnswerId(answer.getTopicAnswerId());
+        answerVo.setTopicAnswerTemp(answer.getTopicAnswerTemp());
+        answerVo.setTopicAnswerContent(answer.getTopicAnswerContent());
+        answerVo.setTopicAnswerTime(answer.getTopicAnswerTime());
+
+        answerVo.setUserIdAnswer(userAnswer.getUserId());
+        answerVo.setNicknameAnswer(userAnswer.getNickname());
+        answerVo.setAvatarPathAnswer(userAnswer.getNickname());
+
+        return answerVo;
     }
 }

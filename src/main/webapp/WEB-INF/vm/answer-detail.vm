@@ -35,7 +35,7 @@
     <div class="content">
         <div class="topic-info">
             <p class="writer-info">
-                <img class="writer-img" src="http://placehold.it/25x25" alt="">
+                <img class="writer-img" src="/img/person.png" alt="">
                 <span class="writer-name">$answerDetail.nicknameAnswer</span>
                 <span class="temperature-small fr">$answerDetail.topicAnswerTemp° </span>
             </p>

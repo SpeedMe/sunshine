@@ -6,16 +6,18 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link href="ratchet/css/ratchet.css" rel="stylesheet">
-    <link href="css/topic.css" rel="stylesheet">
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/answer-detail.js"></script>
+    <link href="../../ratchet/css/ratchet.css" rel="stylesheet">
+    <link href="../../css/topic.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/answer-detail.js"></script>
 </head>
 <body class="answer-detail-body">
-    <header class="bar bar-nav topic-header">
+
+    #set($answerDetail = $answerDetailRes.data)
+    <header class="bar bar-nav topic-header" data-answer-id="$answerDetail.topicAnswerId" data-user-id="$answerDetail.userIdAnswer">
         <button class="btn btn-link btn-nav pull-left turn-back">
             <span class="icon icon-left-nav"></span>
-            <span class="answer-time">1997年04月08日</span>
+            <span class="answer-time">$answerDetail.topicAnswerTime</span>
         </button>
         <button class="btn btn-link btn-nav pull-right">
             <span class="icon icon-share-btn"></span>
@@ -34,11 +36,11 @@
         <div class="topic-info">
             <p class="writer-info">
                 <img class="writer-img" src="http://placehold.it/25x25" alt="">
-                <span class="writer-name">甜洁</span>
-                <span class="temperature-small fr">100° </span>
+                <span class="writer-name">$answerDetail.nicknameAnswer</span>
+                <span class="temperature-small fr">$answerDetail.topicAnswerTemp° </span>
             </p>
             <p class="answer-detail">
-                1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。
+                $answerDetail.topicAnswerContent
             </p>
         </div>
     </div>

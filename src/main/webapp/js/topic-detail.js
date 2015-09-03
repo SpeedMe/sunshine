@@ -17,13 +17,9 @@
                 if (e.target.tagName !== "LI") {
                     target = $(e.target).closest('li');
                 }
+                var answerId = target.attr('data-answerId');
+                location.href = '/shine/sunAnswer/getAnswerById/' + answerId;
 
-                if (loc.writeUser) {
-                    var answerId = target.attr('data-answerId');
-                    location.href = 'answerDetail.html?channelId=' + cid + '&topicId=' + tid + '&userId=' + loc.writeUser.data.userId + '&answerId=' + answerId;
-                } else {
-                    location.href = '/login.html';
-                }
             });
             //绑定关注按钮
             $('.follow-btn').on('click', function (e) {
@@ -48,7 +44,7 @@
             //回答按钮
             $('.answer-btn').on('click', function (e) {
                 var loc = topic._param;
-                location.href = '/vm/answer-write.vm?channelId=' + cid + '&topicId=' + tid + '&userId=' + uid;
+                location.href = '/answer-write.html?channelId=' + cid + '&topicId=' + tid + '&userId=' + uid;
                 return false
             });
             //返回

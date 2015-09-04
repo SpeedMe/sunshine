@@ -139,6 +139,7 @@ public class Convertor {
         answerVo.setTopicAnswerTemp(answer.getTopicAnswerTemp());
         answerVo.setTopicAnswerContent(answer.getTopicAnswerContent());
         answerVo.setTopicAnswerTime(answer.getTopicAnswerTime());
+        answerVo.setIsAnonymityAnswer(answer.getIsAnonymity());
 
         answerVo.setUserIdAnswer(userAnswer.getUserId());
         answerVo.setNicknameAnswer(userAnswer.getNickname());

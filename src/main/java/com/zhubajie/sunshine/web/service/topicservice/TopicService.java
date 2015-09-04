@@ -96,7 +96,7 @@ public interface TopicService {
      * @return
      * @throws Exception
      */
-    List<SunChannelTopic> queryFollowTopicByUserId(Integer userId) throws Exception;
+    List<SunChannelTopic> getFollowedTopicsByUserId(Integer userId) throws Exception;
 
     /**
      * 得到频道下面温度最高的话题

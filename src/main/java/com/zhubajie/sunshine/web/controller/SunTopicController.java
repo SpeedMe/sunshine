@@ -9,6 +9,7 @@ import com.zhubajie.sunshine.web.service.topicservice.TopicService;
 import com.zhubajie.sunshine.web.service.userservice.UserService;
 import com.zhubajie.sunshine.web.vo.AnswerVo;
 import com.zhubajie.sunshine.web.vo.TopicDetailVo;
+import com.zhubajie.sunshine.web.vo.TopicIssueVo;
 import com.zhubajie.sunshine.web.vo.TopicVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -253,26 +254,54 @@ public class SunTopicController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/getTopicsByUserId/{userId}", method = RequestMethod.GET)
-    public FeResponse<List<TopicVo>> getTopicsByUserId(@PathVariable String userId){
-        FeResponse<List<TopicVo>> response;
+    @RequestMapping(value = "/getIssueTopicsByUserId/{userId}", method = RequestMethod.GET)
+    public FeResponse<List<TopicIssueVo>> getIssueTopicsByUserId(@PathVariable String userId){
+        FeResponse<List<TopicIssueVo>> response;
 
         try{
             List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByUserIdOrderByTime(Integer.parseInt(userId));
 
-            List<TopicVo> topicVos = new LinkedList<TopicVo>();
+            List<TopicIssueVo> topicIssueVos = new LinkedList<TopicIssueVo>();
 
             for (SunChannelTopic sunChannelTopic : sunChannelTopics) {
-                SunShineUser userTopic = userService.getUserById(sunChannelTopic.getUserId());
                 SunShineChannel sunShineChannel = channelService.getChannelById(sunChannelTopic.getChannelId());
 
-                topicVos.add(Convertor.convertToTopicVo(sunShineChannel, sunChannelTopic, userTopic, null, null));
+                Integer followPeopleNum = topicService.countFollowTopic(sunChannelTopic.getTopicId());
+                Integer answerNum = answerService.countTopicAnswer(sunChannelTopic.getTopicId());
+                topicIssueVos.add(Convertor.convertToTopicIssueVo(sunShineChannel, sunChannelTopic, followPeopleNum, answerNum));
             }
 
-            response = new FeResponse<List<TopicVo>>(HttpStatus.OK.value(), "查询成功", topicVos);
+            response = new FeResponse<List<TopicIssueVo>>(HttpStatus.OK.value(), "查询成功", topicIssueVos);
         }catch (Exception e){
             logger.error(e.getMessage());
-            response = new FeResponse<List<TopicVo>>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+            response = new FeResponse<List<TopicIssueVo>>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+        }
+
+        return response;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getFollowedTopicsByUserId/{userId}", method = RequestMethod.GET)
+    public FeResponse<List<TopicIssueVo>> getFollowedTopicsByUserId(@PathVariable String userId){
+        FeResponse<List<TopicIssueVo>> response;
+
+        try{
+            List<SunChannelTopic> sunChannelTopics = topicService.getFollowedTopicsByUserId(Integer.parseInt(userId));
+
+            List<TopicIssueVo> topicIssueVos = new LinkedList<TopicIssueVo>();
+
+            for (SunChannelTopic sunChannelTopic : sunChannelTopics) {
+                SunShineChannel sunShineChannel = channelService.getChannelById(sunChannelTopic.getChannelId());
+
+                Integer followPeopleNum = topicService.countFollowTopic(sunChannelTopic.getTopicId());
+                Integer answerNum = answerService.countTopicAnswer(sunChannelTopic.getTopicId());
+                topicIssueVos.add(Convertor.convertToTopicIssueVo(sunShineChannel, sunChannelTopic, followPeopleNum, answerNum));
+            }
+
+            response = new FeResponse<List<TopicIssueVo>>(HttpStatus.OK.value(), "查询成功", topicIssueVos);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<List<TopicIssueVo>>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
         }
 
         return response;

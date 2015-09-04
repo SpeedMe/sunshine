@@ -4,10 +4,7 @@ import com.zhubajie.sunshine.web.model.SunChannelTopic;
 import com.zhubajie.sunshine.web.model.SunShineChannel;
 import com.zhubajie.sunshine.web.model.SunShineUser;
 import com.zhubajie.sunshine.web.model.SunTopicAnswer;
-import com.zhubajie.sunshine.web.vo.AnswerVo;
-import com.zhubajie.sunshine.web.vo.ChannelVo;
-import com.zhubajie.sunshine.web.vo.TopicDetailVo;
-import com.zhubajie.sunshine.web.vo.TopicVo;
+import com.zhubajie.sunshine.web.vo.*;
 
 import java.util.Date;
 import java.util.List;
@@ -21,12 +18,13 @@ public class Convertor {
 
     /**
      * 转换成频道页面显示实体
+     *
      * @param channel 频道信息
-     * @param topic 话题信息
-     * @param user 用户信息
+     * @param topic   话题信息
+     * @param user    用户信息
      * @return
      */
-    public static ChannelVo convertToChannelVo(SunShineChannel channel, SunChannelTopic topic, SunShineUser user){
+    public static ChannelVo convertToChannelVo(SunShineChannel channel, SunChannelTopic topic, SunShineUser user) {
         ChannelVo channelVo = new ChannelVo();
 
         channelVo.setChannelId(channel.getChannelId());
@@ -49,14 +47,15 @@ public class Convertor {
 
     /**
      * 转换为话题页面显示实体
-     * @param channel 频道信息
-     * @param topic 话题信息
-     * @param userTopic 发表话题的用户信息
-     * @param answer 温度最高回复信息
+     *
+     * @param channel    频道信息
+     * @param topic      话题信息
+     * @param userTopic  发表话题的用户信息
+     * @param answer     温度最高回复信息
      * @param userAnswer 回复的用户信息
      * @return
      */
-    public static TopicVo convertToTopicVo(SunShineChannel channel, SunChannelTopic topic, SunShineUser userTopic, SunTopicAnswer answer, SunShineUser userAnswer){
+    public static TopicVo convertToTopicVo(SunShineChannel channel, SunChannelTopic topic, SunShineUser userTopic, SunTopicAnswer answer, SunShineUser userAnswer) {
 
         TopicVo topicVo = new TopicVo();
 
@@ -98,12 +97,13 @@ public class Convertor {
 
     /**
      * 转换为前端单个话题详情页面
+     *
      * @param channel
      * @param topic
      * @param answerVos
      * @return
      */
-    public static TopicDetailVo convertToTopicDetailVo(SunShineChannel channel, SunChannelTopic topic, SunShineUser userTopic, List<AnswerVo> answerVos){
+    public static TopicDetailVo convertToTopicDetailVo(SunShineChannel channel, SunChannelTopic topic, SunShineUser userTopic, List<AnswerVo> answerVos) {
         TopicDetailVo topicDetailVo = new TopicDetailVo();
 
         topicDetailVo.setChannelId(channel.getChannelId());
@@ -127,11 +127,12 @@ public class Convertor {
 
     /**
      * 转换为前端显示的回复实体
+     *
      * @param answer
      * @param userAnswer
      * @return
      */
-    public static AnswerVo convertToAnswerVo(SunTopicAnswer answer, SunShineUser userAnswer){
+    public static AnswerVo convertToAnswerVo(SunTopicAnswer answer, SunShineUser userAnswer) {
         AnswerVo answerVo = new AnswerVo();
 
         answerVo.setTopicAnswerId(answer.getTopicAnswerId());
@@ -144,5 +145,35 @@ public class Convertor {
         answerVo.setAvatarPathAnswer(userAnswer.getNickname());
 
         return answerVo;
+    }
+
+    /**
+     * 转化用户发布的话题显示实体类
+     * @param channel
+     * @param topic
+     * @param followPeopleNum
+     * @param answerNum
+     * @return
+     */
+    public static TopicIssueVo convertToTopicIssueVo(SunShineChannel channel, SunChannelTopic topic, Integer followPeopleNum, Integer answerNum) {
+        TopicIssueVo topicIssueVo = new TopicIssueVo();
+
+        topicIssueVo.setChannelId(channel.getChannelId());
+        topicIssueVo.setChannelName(channel.getChannelName());
+        topicIssueVo.setChannelTemp(channel.getChannelTemp());
+
+        if (topic != null) {
+            topicIssueVo.setTopicId(topic.getTopicId());
+            topicIssueVo.setTopicTemp(topic.getTopicTemp());
+            topicIssueVo.setTopicName(topic.getTopicName());
+            topicIssueVo.setTopicContent(topic.getTopicContent());
+            topicIssueVo.setTopicCreateTime(topic.getTopicCreateTime());
+            topicIssueVo.setIsAnonymityTopic(topic.getIsAnonymity());
+        }
+
+        topicIssueVo.setFollowPeopleNum(followPeopleNum);
+        topicIssueVo.setAnswerNum(answerNum);
+
+        return topicIssueVo;
     }
 }

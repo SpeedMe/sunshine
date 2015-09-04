@@ -11,7 +11,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:config/spring.xml
+            classpath:config/spring.xml
         </param-value>
     </context-param>
 
@@ -62,8 +62,8 @@
     </servlet-mapping>
 
     <!-- 首页 -->
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>index.html</welcome-file>-->
+    <!--</welcome-file-list>-->
 
 </web-app>

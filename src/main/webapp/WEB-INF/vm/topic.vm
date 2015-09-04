@@ -25,10 +25,10 @@
     <h1 class="title">$channel.channelName</h1>
 </header>
 <nav class="bar bar-tab bottom-btn no-login">
-    <a class="tab-item" href="register.html">
+    <a class="tab-item" href="/register.html">
         注册
     </a>
-    <a class="tab-item" href="login.html">
+    <a class="tab-item" href="/login.html">
         <span></span>
         登录
     </a>
@@ -181,30 +181,30 @@
                 发布的话题
             </a>
         </li>
-        <li class="table-view-cell media">
-            <a>
-                <div class="attention-topic">
-                    <p>1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。</p>
-
-                    <p>
-                        <span>1000人关注</span>
-                        <span>50个回答</span>
-                    </p>
-                </div>
-            </a>
-        </li>
-        <li class="table-view-cell media">
-            <a>
-                <div class="attention-topic">
-                    <p>1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。</p>
-
-                    <p>
-                        <span>1000人关注</span>
-                        <span>50个回答</span>
-                    </p>
-                </div>
-            </a>
-        </li>
+##        <li class="table-view-cell media" id="issue-topic-info">
+##            <a>
+##                <div class="issue-topic">
+##                    <p>1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。</p>
+##
+##                    <p>
+##                        <span>1000人关注</span>
+##                        <span>50个回答</span>
+##                    </p>
+##                </div>
+##            </a>
+##        </li>
+##        <li class="table-view-cell media">
+##            <a>
+##                <div class="attention-topic">
+##                    <p class="">1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了1977年，孩子在放学的途中丢失了。</p>
+##
+##                    <p>
+##                        <span>1000人关注</span>
+##                        <span>50个回答</span>
+##                    </p>
+##                </div>
+##            </a>
+##        </li>
     </ul>
 </div>
 

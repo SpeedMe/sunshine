@@ -195,7 +195,7 @@ public class TopicServiceImpl implements TopicService {
      * @throws Exception
      */
     @Override
-    public List<SunChannelTopic> queryFollowTopicByUserId(Integer userId) throws Exception {
+    public List<SunChannelTopic> getFollowedTopicsByUserId(Integer userId) throws Exception {
         //找出用户关注的所有话题id
         List<Integer> topicIds = new LinkedList<Integer>();
         SunTopicAttentionExample sunTopicAttentionExample = new SunTopicAttentionExample();

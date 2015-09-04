@@ -2,11 +2,13 @@
 	var topic = {
 		_param:{},
 		_init: function(){
-			topic._event();
+			//当前登陆的用户
+			var loginUser = JSON.parse(topic._getLoginUser()).data;
+
+			topic._event(loginUser);
 			topic._loginState();
-			topic._pageLoad();
 		},
-		_event: function(){
+		_event: function(loginUser){
 			//绑定话题
 			$('.content').on('click','.topic-info',function(e){
 				var target = $(e.target);
@@ -40,6 +42,13 @@
 				return false;
 			});
 			$(".go-check-topic").click(function(){
+				$.ajax({
+					type: "GET",
+					url: "/shine/sunTopic/getTopicsByUserId/" + loginUser.userId,
+					success: function(res){
+
+					}
+				});
 				$("#check-topic").addClass("show");
 			});
 			$(".go-attention-topic").click(function(){
@@ -79,7 +88,19 @@
 					$('.bottom-btn').eq(1).addClass('no-login');
 				}
 			});
+		},
+		_getLoginUser: function () {
+			//get函数是返回的数据其他函数接受不到因为异步原因，所以使用这种方式
+			return $.ajax({
+				type: "GET",
+				url: "/shine/sunUser/loginState",
+				async: false,
+				cache: false,
+				success: function () {
+				}
+			}).responseText;
 		}
+
 	}
 	$(document).ready(topic._init);
 })();

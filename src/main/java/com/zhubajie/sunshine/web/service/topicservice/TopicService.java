@@ -19,6 +19,14 @@ public interface TopicService {
     List<SunChannelTopic> getTopicsByChannelIdOrderByTemp(Integer channelId) throws Exception;
 
     /**
+     * 查找用户发布的话题，按时间排序
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    List<SunChannelTopic> getTopicsByUserIdOrderByTime(Integer userId) throws Exception;
+
+    /**
      * 根据topicId获取到话题
      * @param topicId
      * @return

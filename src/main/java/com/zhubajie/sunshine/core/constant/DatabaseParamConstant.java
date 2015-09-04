@@ -23,4 +23,7 @@ public class DatabaseParamConstant {
 
     //最高回复温度
     public final static String ANSWER_TEMP_Max = "topic_answer_temp desc limit 1";
+
+    //话题发布时间
+    public final static String TOPIC_CREATE_TIME = "topic_create_time desc";
 }

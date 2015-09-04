@@ -48,6 +48,21 @@ public class TopicServiceImpl implements TopicService {
         return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
     }
 
+    /**
+     * 查找用户发布的话题，按时间排序
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SunChannelTopic> getTopicsByUserIdOrderByTime(Integer userId) throws Exception {
+        SunChannelTopicExample sunChannelTopicExample = new SunChannelTopicExample();
+        sunChannelTopicExample.createCriteria().andUserIdEqualTo(userId);
+        sunChannelTopicExample.setOrderByClause(DatabaseParamConstant.TOPIC_CREATE_TIME);
+
+        return sunChannelTopicMapper.selectByExample(sunChannelTopicExample);
+    }
+
     @Override
     public SunChannelTopic getTopicByTopicId(Integer topicId) throws Exception {
         return sunChannelTopicMapper.selectByPrimaryKey(topicId);

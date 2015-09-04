@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
     <meta charset="utf-8">
     <title>推荐频道</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
@@ -9,66 +9,20 @@
     <link href="ratchet/css/ratchet.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
 </head>
-<body class="channel-body">
-    <div class="welcome content" id="swipe">
-        <img src="img/welcome.png" alt="">
-    </div>
-    <header class="bar">
-        <img src="img/p1.png" alt="推荐频道" class="logo">
-    </header>
-    <div class="content">
-        <ul class="table-view">
-            <li class="table-view-cell">
-                <a  class="channel-link" href="" target="_self">
-                    <div class="content-header">
-                        <span class="temperature"> </span>
-                        <h3 class="content-tit"></h3>
-                    </div>
-                    <div class="content-body">
-                        <span class="temperature-small"> </span>
-                        <p class="content-inner">
-
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="table-view-cell">
-                <a class="channel-link" href="">
-                    <div class="content-header">
-                        <span class="temperature"></span>
-                        <h3 class="content-tit"></h3>
-                    </div>
-                    <div class="content-body">
-                        <span class="temperature-small"></span>
-                        <p class="content-inner">
-
-                        </p>
-                    </div>
-                </a>
-            </li>
-            <li class="table-view-cell">
-                <a class="channel-link" href="">
-                    <div class="content-header">
-                        <span class="temperature"> </span>
-                        <h3 class="content-tit"></h3>
-                    </div>
-                    <div class="content-body">
-                        <span class="temperature-small"></span>
-                        <p class="content-inner">
-
-                        </p>
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </div>
+<body>
+<div class="welcome content" id="swipe">
+    <img src="img/welcome.png" alt="">
+</div>
 </body>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/jgestures.min.js"></script>
-    <script >
-        $('#swipe').bind('swipeone swipeleft',function(){
-            $('#swipe').addClass("hide");
-        });
-    </script>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jgestures.min.js"></script>
+<script>
+
+    $('#swipe').bind('swipeone swipeleft', function () {
+        $('#swipe').addClass("hide");
+
+        window.location.href='/shine/sunChannel/getAllChannelsOrderByTemp';
+    });
+</script>
 </html>

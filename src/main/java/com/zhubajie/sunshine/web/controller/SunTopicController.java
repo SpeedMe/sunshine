@@ -247,4 +247,35 @@ public class SunTopicController {
         return modelAndView;
     }
 
+    /**
+     * 查询用户发布的话题
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getTopicsByUserId/{userId}", method = RequestMethod.GET)
+    public FeResponse<List<TopicVo>> getTopicsByUserId(@PathVariable String userId){
+        FeResponse<List<TopicVo>> response;
+
+        try{
+            List<SunChannelTopic> sunChannelTopics = topicService.getTopicsByUserIdOrderByTime(Integer.parseInt(userId));
+
+            List<TopicVo> topicVos = new LinkedList<TopicVo>();
+
+            for (SunChannelTopic sunChannelTopic : sunChannelTopics) {
+                SunShineUser userTopic = userService.getUserById(sunChannelTopic.getUserId());
+                SunShineChannel sunShineChannel = channelService.getChannelById(sunChannelTopic.getChannelId());
+
+                topicVos.add(Convertor.convertToTopicVo(sunShineChannel, sunChannelTopic, userTopic, null, null));
+            }
+
+            response = new FeResponse<List<TopicVo>>(HttpStatus.OK.value(), "查询成功", topicVos);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            response = new FeResponse<List<TopicVo>>(HttpStatus.NOT_IMPLEMENTED.value(), e.getMessage(), null);
+        }
+
+        return response;
+    }
+
 }

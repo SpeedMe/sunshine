@@ -134,7 +134,7 @@
                 if (loc.login.meta.message === "已登录") {
                     $('.bottom-btn').eq(1).removeClass('no-login');
                     $('.bottom-btn').eq(0).addClass('no-login');
-                    $('nav').eq(1).find('a').attr('href', 'issue.html?channelId=' + topic._param.channelId + '&userId=' + loc.login.data.userId);
+                    $('nav').eq(1).find('a').attr('href', '/issue.html?channelId=' + topic._param.channelId + '&userId=' + loc.login.data.userId);
                 } else {
                     $('.bottom-btn').eq(0).removeClass('no-login');
                     $('.bottom-btn').eq(1).addClass('no-login');

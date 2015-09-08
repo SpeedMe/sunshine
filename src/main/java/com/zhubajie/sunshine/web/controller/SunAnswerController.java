@@ -145,6 +145,7 @@ public class SunAnswerController {
         }catch (Exception e){
             logger.error(e.getMessage());
             response = new FeResponse<SunTopicAnswer>(HttpStatus.NOT_IMPLEMENTED.value(),e.getMessage(),null);
+
         }
 
         return response;
